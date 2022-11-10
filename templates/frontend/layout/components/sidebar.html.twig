@@ -1,0 +1,18 @@
+{% if menuItems is defined %}
+    {% for category in menuItems %}
+        <a href="/{{ app.request.locale }}/category/{{ category.slug }}" class="sidebar-category" data-category-id="{{ category}}" data-parent-category-id="{{ category.parent}}">
+            <div class="sidebar-category__icon">
+                {% if category.inlineSvg != null %}
+                    {# <img width="32" height="32" src="/images/category/{{ category.image }}" alt="category-icon"> #}
+                    {{ category.inlineSvg | raw }}
+                {% else %}
+                    <img width="32" height="32" src="{{ asset('images/category/thumb/category-icon-thumb.svg') }}" alt="category-icon">
+                {% endif %}
+            </div>
+            <div class="sidebar-category__text">
+                <div class="sidebar-category__name {% if category.translate(app.request.locale).mobileName != null %}mobile-hidden {% endif %}">{{ category.translate(app.request.locale).name }}</div>
+                <div class="sidebar-category__name sidebar-category__name--mobile">{{category.translate(app.request.locale).mobileName}}</div>
+            </div>
+        </a>
+    {% endfor  %}
+{% endif %}

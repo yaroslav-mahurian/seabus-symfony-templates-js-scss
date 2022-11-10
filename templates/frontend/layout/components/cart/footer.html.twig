@@ -1,0 +1,75 @@
+<div class="cart__footer-wrap">
+    {% if quote.getQuoteItems()|length > 0 %}
+        <div class="vi-wcaio-sidebar-cart-footer-cart_total-wrap">
+
+            <div class="vi-wcaio-sidebar-cart-footer-cart_total is-visible">
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-title"> {% trans %}Total weight{% endtrans %}:</div>
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-value">
+                    <span id="cart_total_weight" data-value=""></span><span>&nbsp;{% trans %}gram{% endtrans %}</span>
+                </div>
+            </div>
+
+            <div class="vi-wcaio-sidebar-cart-footer-cart_total is-visible">
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-title"> {% trans %}Total pieces{% endtrans %}:</div>
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-value">
+                    <span id="cart_total_pieces" data-value=""></span><span>&nbsp;{% trans %}pieces{% endtrans %}</span>
+                </div>
+            </div>
+
+            <div class="vi-wcaio-sidebar-cart-footer-cart_total {{ (quote.getShippingPrice()) ? 'is-visible' : '' }}">
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-title"> {% trans %}delivery{% endtrans %}:</div>
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-value">
+                    <span id="cartDelivery" data-value="{{ quote.getShippingPrice()|number_format(2) }}">{{ quote.getShippingPrice()|number_format(2) }}</span><span>{{currency}}</span>
+                </div>
+            </div>
+
+            <div class="vi-wcaio-sidebar-cart-footer-cart_total is-visible">
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-title"> {% trans %}Subtotal{% endtrans %}:</div>
+                <div class="vi-wcaio-sidebar-cart-footer-cart_total-value">
+                    <span id="cartSubtotal" data-value="{{ quote.getGrandTotal()|number_format(2) }}">{{ quote.getGrandTotal()|number_format(2) }}</span><span>&nbsp;{{currency}}</span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="cart__footer-btns">
+        {% if quote.getQuoteItems()|length > 0 %}
+            <a onclick="checkout.switchStep('next')" data-checkout-step="0" href="#" class="btn">
+                <div class="btn-title">
+                    {% trans %}Proceed to checkout{% endtrans %}
+                </div>
+            </a>
+
+            <a onclick="checkout.switchStep('next')" style="display: none;" data-validate-form data-checkout-step="1" href="#" class="btn btn--dark btn--col-group">
+                <div class="btn-title">
+                    {% trans %}Order & Payment{% endtrans %}
+                </div>
+            </a>
+
+            <a onclick="checkout.placeOrder()" style="display: none;" data-checkout-step="2" href="#" class="btn btn--dark btn--col-group">
+                <div class="btn-title">
+                    {% trans %}Place order{% endtrans %}
+                </div>
+            </a>
+
+            <a onclick="checkout.switchStep('back')" style="display: none;" data-checkout-btn-back href="#" class="btn btn--col-group">
+                <div class="btn-title">
+                    {% trans %}Back{% endtrans %}
+                </div>
+            </a>
+
+        {% else %}
+            <div class="empty-cart__btn">
+                <a href="#" class="btn">
+                    <div class="btn-title">
+                        {% trans %}Order history{% endtrans %}
+                    </div>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+

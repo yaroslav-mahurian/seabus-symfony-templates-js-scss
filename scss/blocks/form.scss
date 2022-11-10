@@ -1,0 +1,256 @@
+.form__row, #display_with_country_code_select_box {
+    display: flex;
+    padding-bottom: 6px;
+    align-items: center;
+
+    border-bottom: 1px solid #7BE1FF;
+
+    &--full-width {
+        width: 100% !important;
+
+        .form__input {
+            
+            padding-left: 15px;
+
+            &::placeholder {
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 24px;
+
+                color: rgba(35, 193, 239, 0.8);
+            }
+        }
+    }
+}
+
+
+
+.form__input, #display_with_country_code_select_box input {
+    padding-top: 5px;
+    padding-left: 15px;
+    width: 100%;
+    
+    background: transparent;
+    border: 0;
+    
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: lowercase;
+
+    color: rgba(35, 193, 239, 0.8);
+    transition: border-color .3s ease-out;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder {
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: lowercase;
+
+        color: rgba(35, 193, 239, 0.8);
+    }
+
+    &[type='date'] {
+        &::-webkit-calendar-picker-indicator {
+            color: rgba(0, 0, 0, 0);
+            opacity: 1;
+            display: block;
+            background: url(../img/icons/date-picker.svg) no-repeat;
+            width: 20px;
+            height: 20px;
+            border-width: thin;
+        }
+    
+    }
+}
+
+.form__btns {
+    padding-top: 48px;
+    display: flex;
+    justify-content: flex-end;
+
+    /* background: rgba(197, 242, 255, 0.2); */
+    
+    .btn + .btn {
+        margin-left: 67px;
+    }
+
+    &--address {
+        padding-top: 30px;
+    }
+
+    @media (max-width: 1199px) {
+        margin-top: 25px;
+        padding: 0;
+
+        background: none;
+
+        &--address {
+            padding: 0;
+            margin-top: 30px;
+        }
+    }
+}
+
+/* Woocomerce styles */
+.form-row, .vi-wcaio-sidebar-cart-header-coupon-wrap {
+    padding-bottom: 6px;
+    border-bottom: 1px solid #7BE1FF;
+
+    &.flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border-bottom: none;
+
+        &:before, &:after {
+            @include hide;
+        }
+    }
+
+    &.form-inspireradio {
+        border-bottom: none;
+    }
+
+    &.woocommerce-invalid {
+        border-bottom: 1px solid rgb(170, 0, 0);
+    }
+
+    & input, .woocommerce-input-wrapper .select2-container, textarea, strong, .vi-wcaio-coupon-code {
+    padding-top: 5px ;
+    padding-left: 20px;
+    width: 100%;
+    
+    background: transparent;
+    border: 0;
+    
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: lowercase;
+
+    color: rgba(35, 193, 239, 0.8);
+    transition: border-color .3s ease-out;
+
+    & strong {
+        font-weight: normal !important;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder {
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: lowercase;
+
+        color: rgba(35, 193, 239, 0.8);
+    }
+
+    &[type='radio'] {
+        border: 1px solid #0084AA;    
+    }
+
+    &[type='date'] {
+        &::-webkit-calendar-picker-indicator {
+            color: rgba(0, 0, 0, 0);
+            opacity: 1;
+            display: block;
+            background: url(../img/icons/date-picker.svg) no-repeat;
+            width: 20px;
+            height: 20px;
+            border-width: thin;
+        }
+    
+    }
+
+    }
+}
+
+.form__row-icon {
+ 
+    & path {
+        fill: #0084AA;
+    }
+    
+}
+
+.ma-profile-address-default-form {
+    width: 100%;
+}
+
+.woocommerce-address-fields__field-wrapper {
+    margin-top: 45px;
+}
+
+.woocommerce form .form-row {
+    margin-top: 25px;
+}
+
+.ma-profile-default-submit-btn {
+    @include hide;
+}
+
+.select2-selection {
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 0;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: rgba(35, 193, 239, 0.8);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 0;
+    border-bottom: 1px solid #7BE1FF;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: rgba(35, 193, 239, 0.8) transparent transparent transparent;
+}
+
+.select2-dropdown {
+    border: 0;
+    border-radius: 2px;
+}
+
+.select2-results__option {
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: rgba(35, 193, 239, 0.8);
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #0084AA;
+}
+
+.woocommerce-form-register {
+    .form-row + p {
+        margin-top: 0px;
+        margin-bottom: 15px;
+
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        text-transform: lowercase;
+        color: rgba(35,193,239,0.8);
+    }
+}

@@ -1,0 +1,94 @@
+{% if app.request.get('promo_product_id') != null %}
+    <div class="promo-products">
+        {% set promo_product = productRepository.find(app.request.get('promo_product_id')) %}
+        {% set gift_product = productRepository.find(app.request.get('gift_product_id')) %}
+    
+        <div class="vi-wcaio-sidebar-cart-pd-wrap-divider">
+            {% trans %}Add{% endtrans %}
+        </div>
+
+        <li class="vi-wcaio-sidebar-cart-pd-wrap">
+            <div class="vi-wcaio-sidebar-cart-pd-wrap-container">
+                <div class="vi-wcaio-sidebar-cart-pd-img-wrap">
+                        {% if promo_product.image != null %}
+                            <img src="/images/product/{{ promo_product.image }}" alt="">
+                        {% else %}
+                            <picture>
+                                <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                <img width="150" height="150" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                            </picture>
+                        {% endif %}
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                    <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                        <a href="/{{ app.request.locale }}/product/{{ promo_product.slug }}">
+                            {{ promo_product.translate(app.request.locale).name }}
+                        </a>								
+                    </div>
+                    <div class="vi-wcaio-sidebar-cart-pd-meta"></div>
+                </div>   
+            </div>
+            
+            <a class="btn btn--dark btn--full-w" href="#" data-promo-product onclick="checkout.addToCard({{promo_product.id}})">{% trans %}Add to cart{% endtrans %}</a>
+        </li> 
+
+        <div class="vi-wcaio-sidebar-cart-pd-wrap-divider">
+            {% trans %}And get it for free{% endtrans %}:
+        </div>
+
+        <li class="vi-wcaio-sidebar-cart-pd-wrap">
+            <div class="vi-wcaio-sidebar-cart-pd-wrap-container">
+                <div class="vi-wcaio-sidebar-cart-pd-img-wrap vi-wcaio-sidebar-cart-pd-img-wrap">
+                        {% if gift_product.image != null %}
+                            <img src="/images/product/{{ gift_product.image }}" alt="">
+                        {% else %}
+                            <picture>
+                                <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                <img width="150" height="150" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                            </picture>
+                        {% endif %}
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                    <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                        <a href="/{{ app.request.locale }}/product/{{ gift_product.slug }}">
+                            {{ gift_product.translate(app.request.locale).name }}
+                        </a>								
+                    </div>
+                </div>
+            </div>      
+                
+        </li> 
+    </div>
+{% else %}
+    <div class="empty-cart">
+        <div class="empty-cart__content">
+
+            <div class="empty-cart__icon">
+                <svg class="empty-cart__icon-img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 4H19" stroke="#02BFC5" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M18 8L17.2131 18.2301C17.0928 19.7931 15.7895 21 14.2219 21H9.77809C8.21048 21 6.90716 19.7931 6.78693 18.2301L6 8" stroke="#02BFC5" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 4.00011L9.84479 4.00011C10.5665 4.00011 11.2405 3.63942 11.6408 3.03892C11.8117 2.7826 12.1883 2.7826 12.3592 3.03892C12.7595 3.63942 13.4335 4.00012 14.1552 4.00012L16 4.00012" stroke="#02BFC5" stroke-width="2"/>
+                </svg>
+
+                <div class="empty-cart__text">
+                    {% trans %}The shopping cart is empty{% endtrans %}!
+                </div>
+            </div>
+
+            <div class="empty-cart__p">
+                {% trans %}Select items from the menu on the site and click "Buy" to place an order{% endtrans %}.
+            </div>
+        </div>
+
+    </div>
+{% endif %}
+
+
+
+        
+        
+
+
+   

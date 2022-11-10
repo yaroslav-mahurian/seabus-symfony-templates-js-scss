@@ -1,0 +1,140 @@
+<ul class="vi-wcaio-sidebar-cart-products" data-checkout-step="0">
+    {% for item in quote.getQuoteItems() %}
+        {% set categories = [] %}
+        {% for cat in item.getProduct().getCategories() %}
+            {% set categories = categories|merge([cat.name]) %}
+        {% endfor %}
+        <li class="vi-wcaio-sidebar-cart-pd-wrap" data-item-id="{{ item.id }}" data-product-id="{{ item.product.id }}" data-price="{{item.getProduct().getPrice()}}" data-name="{{ item.product.translate(app.request.locale).name }}" data-quantity="{{ item.qty }}" data-category="{{categories|join('/')}}">
+            <div class="vi-wcaio-sidebar-cart-pd-img-wrap vi-wcaio-sidebar-cart-pd-img-wrap--mobile-hidden">
+                <a href="/{{ app.request.locale }}/product/{{ item.product.slug }}">
+                    {% if item.product.image != null %}
+                        <img src="/images/product/{{ item.product.image }}" alt="">
+                    {% else %}
+                        <picture>
+                            <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                            <img width="150" height="150" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                        </picture>
+                    {% endif %}
+                </a>			
+            </div>
+
+            <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                    <a href="/{{ app.request.locale }}/product/{{ item.product.slug }}">
+                        {{ item.product.translate(app.request.locale).name }}
+                    </a>					
+                    <div class="vi-wcaio-sidebar-cart-pd-remove-wrap">
+                        <a href="#" onclick="checkout.removeFromCard({{ item.id }})">
+                            <svg width="15" fill="#0084aa" height="15" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title></title><g id="Fill"><polygon points="28.71 4.71 27.29 3.29 16 14.59 4.71 3.29 3.29 4.71 14.59 16 3.29 27.29 4.71 28.71 16 17.41 27.29 28.71 28.71 27.29 17.41 16 28.71 4.71"></polygon></g>
+                            </svg>
+                        </a>	
+                    </div>				
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-mobile-content-container">
+                    <div class="vi-wcaio-sidebar-cart-pd-mobile-content-wrap">
+                        <div class="vi-wcaio-sidebar-cart-pd-mobile-flex-wrap">
+                            <div class="vi-wcaio-sidebar-cart-pd-img-wrap">
+                                <a href="https://www.seabus.pl/produkt/maki-roll-z-ogorkiem/">
+                                    {% if item.product.image != null %}
+                                        <img width="150" height="150" src="/images/product/{{ item.product.image }}" alt="">
+                                    {% else %}
+                                        <picture>
+                                            <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                            <img width="150" height="150" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                                        </picture>
+                                    {% endif %}
+                                </a>					
+                            </div>
+
+                            <div class="vi-wcaio-sidebar-cart-pd-attr">
+                                <div class="products-el__info">
+                                    {% if item.product.weight %}
+                                        <div class="products-el__info-item">
+                                            <div class="products-el__info-item-title">{% trans %}Weight{% endtrans %}</div>
+                                            <div class="products-el__info-item-divider">:</div>
+                                            <div class="products-el__info-item-value" data-product-weight="{{ item.product.weight }}" >{{ item.product.weight }} {% trans %}gram{% endtrans %}</div>
+                                        </div>
+                                    {% endif %}
+                                    {% if item.product.pieces %}
+                                        <div class="products-el__info-item">
+                                            <div class="products-el__info-item-title">{% trans %}Pieces{% endtrans %}</div>
+                                            <div class="products-el__info-item-divider">:</div>
+                                            <div class="products-el__info-item-value" data-product-pieces="{{ item.product.pieces }}">{{ item.product.pieces }} {% trans %}pieces{% endtrans %}</div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vi-wcaio-sidebar-cart-pd-mobile-desc">
+                            <div class="vi-wcaio-sidebar-cart-pd-quantity">
+                                    <input type="number" data-product-qty class="input-text" placeholder="" value="{{ item.qty }}" min="1" max="15">
+                            </div>
+                            <div class="vi-wcaio-sidebar-cart-pd-price">
+                                <div class="products-el__price-container">
+                                    <div class="vi-wcaio-sidebar-cart-pd-price-def" {% if item.product.specialPrice != null %}style="text-decoration: line-through"{% endif %}>
+                                        {{ item.product.price }} {{currency}}
+                                    </div>
+
+                                    {% if item.product.specialPrice != null %}
+                                    <div class="highlight">
+                                        <div>
+                                            {{ item.product.specialPrice }} {{currency}}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="vi-wcaio-sidebar-cart-pd-desktop-content-container">
+                    <div class="vi-wcaio-sidebar-cart-pd-attr">
+                        <div class="products-el__info">
+                            {% if item.product.weight %}
+                                <div class="products-el__info-item">
+                                    <div class="products-el__info-item-title">{% trans %}Weight{% endtrans %}</div>
+                                    <div class="products-el__info-item-divider">:</div>
+                                    <div class="products-el__info-item-value">{{ item.product.weight }} {% trans %}gram{% endtrans %}</div>
+                                </div>
+                            {% endif %}
+                            {% if item.product.pieces %}
+                                <div class="products-el__info-item">
+                                    <div class="products-el__info-item-title">{% trans %}Pieces{% endtrans %}</div>
+                                    <div class="products-el__info-item-divider">:</div>
+                                    <div class="products-el__info-item-value">{{ item.product.pieces }} {% trans %}pieces{% endtrans %}</div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="vi-wcaio-sidebar-cart-pd-meta"></div>
+                <div class="vi-wcaio-sidebar-cart-pd-desc">
+                    <div class="vi-wcaio-sidebar-cart-pd-quantity">
+                            <input type="number" data-product-qty class="input-text" placeholder="" value="{{ item.qty }}" min="0" max="15">
+                    </div>
+                    <div class="vi-wcaio-sidebar-cart-pd-price">
+                        <div class="products-el__price-container">
+                            <div class="vi-wcaio-sidebar-cart-pd-price-def" {% if item.product.specialPrice != null %}style="text-decoration: line-through"{% endif %}>
+                                {{ item.product.price }} {{currency}}
+                            </div>
+
+                            {% if item.product.specialPrice != null %}
+                            <div class="highlight">
+                                <div>
+                                    {{ item.product.specialPrice }} {{currency}}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </li>   
+    {% endfor  %}
+</ul>

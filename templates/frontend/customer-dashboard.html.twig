@@ -1,0 +1,169 @@
+{% extends 'frontend/layout/base_layout.html.twig' %}
+
+{% block content %}
+    <div class="ma-navigation">
+        <div class="ma-navigation__desktop-title">
+            <h1 class="section__title">{% trans %}Cabinet{% endtrans %}</h1>
+        </div>
+
+        <div class="ma-navigation__wrapper">
+            <div class="ma-navigation__inner">
+                <a
+                    class="ma-navigation__link is-active"
+                    href="/{{ app.request.locale }}/customer"
+                >
+                    <div class="ma-navigation__link-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M19.5 10C19.5 15.2459 15.2459 19.5 10 19.5C4.75412 19.5 0.5 15.2459 0.5 10C0.5 4.75412 4.75412 0.5 10 0.5C15.2459 0.5 19.5 4.75412 19.5 10Z"
+                                stroke="#02BFC5"
+                            ></path>
+                            <path
+                                d="M7.74638 8.35176C7.74638 6.75009 8.75085 5.5962 9.84658 5.50503H10H10.0595C11.1913 5.54417 12.2488 6.71434 12.2488 8.35678C12.2488 10.0013 11.1898 11.1738 10.0604 11.2085H9.99517C9.33626 11.2085 8.78672 10.8768 8.3855 10.3396C7.97919 9.79561 7.74638 9.06307 7.74638 8.35176ZM15.2207 17.295C15.2775 17.402 15.3279 17.4987 15.3713 17.5827C13.555 18.9674 11.3661 19.3561 10.2845 19.4622L10.038 19.4864C10.0371 19.4863 10.0362 19.4862 10.0354 19.4862L10 19.4837L9.96463 19.4862C9.96376 19.4862 9.96289 19.4863 9.96203 19.4864L9.71546 19.4622C8.63395 19.3561 6.4451 18.9674 4.62886 17.5828C4.67215 17.499 4.72253 17.4026 4.77919 17.2958C4.98771 16.903 5.28001 16.3734 5.61619 15.8237C5.95343 15.2721 6.32912 14.7097 6.70381 14.2469C7.09033 13.7696 7.43148 13.4548 7.6903 13.3299C8.18679 13.0917 9.0639 12.9497 10.0018 12.9497C10.9402 12.9497 11.8159 13.0919 12.3095 13.3298L12.3107 13.3304C12.5687 13.4539 12.9096 13.7675 13.2963 14.2449C13.6709 14.7074 14.0465 15.2698 14.3837 15.8217C14.7199 16.3717 15.0122 16.9018 15.2207 17.295Z"
+                                stroke="#02BFC5"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="ma-navigation__link-text">{% trans %}My account{% endtrans %}</span>
+                </a>
+
+                <a
+                    href="/{{ app.request.locale }}/customer/logout"
+                    class="ma-navigation__link ma-navigation__link--logout"
+                    >{% trans %}Logout{% endtrans %}</a
+                >
+            </div>
+        </div>
+
+        <div class="ma-profile-wrapper">
+            <div class="ma-profile-form__photo-wrapper">
+                <div class="ma-profile-form__photo">
+                    <img
+                        src="{{ asset('images/assets/user-avatar.png') }}"
+                        alt="user-avatar"
+                    />
+                </div>
+            </div>
+
+            <div class="ma-profile-form__wrapper">
+                <div class="ma-profile-form__inner">
+                    <form class="ma-profile-form" action="/{{ app.request.locale }}/customer/saveData" method="post">
+                        <div class="ma-profile-form__title">{{customer.firstName}}&nbsp{{customer.lastName}}</div>
+
+                        {# First name #}
+                        <div class="form__row">
+                            <svg class="form__row-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 19C4 16.2386 6.23858 14 9 14H15C17.7614 14 20 16.2386 20 19C20 20.6569 18.6569 22 17 22H7C5.34315 22 4 20.6569 4 19ZM9 16C7.34315 16 6 17.3431 6 19C6 19.5523 6.44772 20 7 20H17C17.5523 20 18 19.5523 18 19C18 17.3431 16.6569 16 15 16H9Z" fill="#0A84AA"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C10.3431 4 9 5.34315 9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7C15 5.34315 13.6569 4 12 4ZM7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7Z" fill="#0A84AA"></path>
+                            </svg>
+
+                            <input class="form__input" name="customerFirstName" id="customerFirstName" type="text" 
+                            placeholder="{% trans %}First name{% endtrans %}" 
+                            value="{{customer.firstName}}"
+                            > 
+
+                        </div>
+
+                        {# Last name #}
+                        <div class="form__row">
+                            <svg
+                                class="form__row-icon"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M4 19C4 16.2386 6.23858 14 9 14H15C17.7614 14 20 16.2386 20 19C20 20.6569 18.6569 22 17 22H7C5.34315 22 4 20.6569 4 19ZM9 16C7.34315 16 6 17.3431 6 19C6 19.5523 6.44772 20 7 20H17C17.5523 20 18 19.5523 18 19C18 17.3431 16.6569 16 15 16H9Z"
+                                    fill="#0A84AA"
+                                ></path>
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M12 4C10.3431 4 9 5.34315 9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7C15 5.34315 13.6569 4 12 4ZM7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7Z"
+                                    fill="#0A84AA"
+                                ></path>
+                            </svg>
+
+                            <input
+                                class="form__input"
+                                name="customerLastName"
+                                id="customerLastName"
+                                type="text"
+                                placeholder="{% trans %}Last name{% endtrans %}"
+                                value="{{customer.lastName}}"
+                            />
+                        </div>
+
+                        {# Phone #}
+                        <div class="form__row">
+                            <svg class="form__row-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.9684 1.21546C5.38659 0.408873 7.83024 1.92363 8.50901 4.37608C8.97152 6.04722 8.53349 7.79953 7.46537 8.99943C7.68413 9.28275 7.92317 9.55516 8.18267 9.81485C8.44091 10.0733 8.71168 10.3114 8.99323 10.5295C10.1927 9.45289 11.9503 9.00995 13.6263 9.47448C16.0782 10.1541 17.5902 12.5997 16.7848 15.0178C16.2565 16.6043 15.2712 17.5683 13.9571 17.8856C12.7361 18.1804 11.4197 17.867 10.2585 17.3843C7.91998 16.4122 5.6108 14.4973 4.5562 13.4419C3.4767 12.3616 1.57009 10.0491 0.606767 7.71494C0.128401 6.55585 -0.179611 5.24425 0.115904 4.02886C0.433836 2.72127 1.3929 1.74093 2.9684 1.21546ZM6.58147 4.90955C6.16878 3.41847 4.79755 2.71367 3.60122 3.1127C2.54962 3.46344 2.18488 3.98482 2.05928 4.50138C1.91127 5.11013 2.03998 5.94512 2.45551 6.95196C3.27998 8.94966 4.98986 11.0464 5.97094 12.0282C6.92827 12.9863 9.02282 14.7047 11.0263 15.5376C12.0361 15.9574 12.8752 16.0894 13.4877 15.9415C14.0071 15.8161 14.5332 15.4492 14.8873 14.3858C15.2867 13.1867 14.5807 11.8144 13.0921 11.4018C11.9842 11.0947 10.8451 11.4505 10.1672 12.1765C9.7295 12.6453 8.89506 12.9126 8.18511 12.417C7.68559 12.0684 7.2112 11.6721 6.76793 11.2285C6.32396 10.7842 5.92757 10.3087 5.57884 9.80807C5.08641 9.10115 5.34917 8.26996 5.81458 7.83119C6.53521 7.15181 6.88748 6.01524 6.58147 4.90955Z" fill="#0084AA"/>
+                            </svg>
+
+                            <input
+                                class="form__input"
+                                name="customerPhone"
+                                id="customerPhone"
+                                type="text"
+                                placeholder="{% trans %}Phone{% endtrans %}"
+                                value="{{customer.telephone}}"
+                            />
+                        </div>
+
+                        {# Birthdate #}
+                        {# <div class="form__row">
+                            <svg class="form__row-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.6 1.87345H19.775V0.995544C19.775 0.445277 19.4168 0 18.975 0C18.5332 0 18.175 0.445277 18.175 0.995544V1.87345H15.125V0.995544C15.125 0.445277 14.7668 0 14.325 0C13.8832 0 13.525 0.445277 13.525 0.995544V1.87345H10.475V0.995544C10.475 0.445277 10.1168 0 9.675 0C9.2332 0 8.875 0.445277 8.875 0.995544V1.87345H5.825V0.995544C5.825 0.445277 5.4668 0 5.025 0C4.5832 0 4.225 0.445277 4.225 0.995544V1.87345H2.4C1.07656 1.87345 0 3.21316 0 4.86009V21.0134C0 22.6603 1.07656 24 2.4 24H21.6C22.9234 24 24 22.6603 24 21.0134V4.86009C24 3.21316 22.9234 1.87345 21.6 1.87345ZM2.4 3.86454H4.225V4.74245C4.225 5.29272 4.5832 5.738 5.025 5.738C5.4668 5.738 5.825 5.29272 5.825 4.74245V3.86454H8.875V4.74245C8.875 5.29272 9.2332 5.738 9.675 5.738C10.1168 5.738 10.475 5.29272 10.475 4.74245V3.86454H13.525V4.74245C13.525 5.29272 13.8832 5.738 14.325 5.738C14.7668 5.738 15.125 5.29272 15.125 4.74245V3.86454H18.175V4.74245C18.175 5.29272 18.5332 5.738 18.975 5.738C19.4168 5.738 19.775 5.29272 19.775 4.74245V3.86454H21.6C22.041 3.86454 22.4 4.31078 22.4 4.86009V7.76019H1.6V4.86009C1.6 4.31078 1.95898 3.86454 2.4 3.86454ZM21.6 22.0089H2.4C1.95898 22.0089 1.6 21.5627 1.6 21.0134V9.75127H22.4V21.0134C22.4 21.5627 22.041 22.0089 21.6 22.0089Z" fill="#0084AA"/>
+                            </svg>
+
+                            <input
+                                class="form__input"
+                                type="date"
+                                placeholder="{% trans %}Birthdate{% endtrans %}"
+                                name="{{customer.birthdate}}"
+                                id="{{customer.birthdate}}"
+                                value=""
+                            />
+                        </div> #}
+
+                        <div class="form__btns">
+                            <button
+                                type="submit"
+                                class="btn btn--dark btn--xl"
+                                name="saveCustomerDetails"
+                                id="saveCustomerDetails"
+                            >
+                                <div class="btn-title">{% trans %}Edit{% endtrans %}</div>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="ma-navigation__logout">
+                        <a
+                            class="btn"
+                            href="/{{ app.request.locale }}/customer/logout"
+                        >
+                            <div class="btn-title">{% trans %}Logout{% endtrans %}</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ma-profile__bonuses">
+                <div class="ma-profile__bonuses-title">{% trans %}Bonuses{% endtrans %}</div>
+                <div class="ma-profile__bonuses-value">0</div>
+            </div>
+        </div>
+        <!-- ./ma-profile-wrapper -->
+    </div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% if wishlist.wishlistItems|length  %}
+    <div class="products">
+
+        <div class="products-category">
+            <div class="section__title">
+                {% trans %}Your wishlist{% endtrans %}
+            </div>
+
+            <div class="products-category__wrapper">
+                {% for item in wishlist.wishlistItems  %}
+                    <div class="products-el">
+                        <div class="prod-cat-product__wrapper">
+                            <div class="products-el__top">
+                                <div class="products-el__header">
+                                    <div class="products-el__fav">
+                                        <a href="#" onclick="wishlist.removeFromWishlist({{ item.id }})">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.57184 0.292271C5.23816 0.0651681 5.93573 0.000152588 6.55259 0.000152588C8.01732 0.000152588 9.12166 0.625479 10.0001 1.25312C10.8856 0.620667 11.9825 0.000142813 13.4645 0.000152588C14.1234 0.000152588 14.7973 0.0922427 15.4504 0.30951C19.4399 1.60179 20.7249 5.89706 19.6111 9.42534L19.6064 9.4402L19.6012 9.4549C18.9848 11.2145 17.9769 12.8215 16.6544 14.1362L16.6487 14.1419L16.643 14.1474C14.7962 15.9254 12.7223 17.5315 10.5144 18.8573L9.99317 19.1703L9.4754 18.8516C7.2723 17.4953 5.23758 15.9324 3.36838 14.1399L3.36067 14.1325L3.35312 14.1249C2.04202 12.8127 1.0341 11.2175 0.408524 9.45957L0.403292 9.44487L0.398522 9.43001C-0.736831 5.89403 0.554695 1.6039 4.57184 0.292271Z" fill="#0084AA"/>
+                                            </svg>
+
+                                        </a>
+                                    </div>
+                                    <div class="products-el__price-container">
+                                        <div class="products-el__price" {% if item.product.specialPrice != null %}style="text-decoration: line-through"{% endif %}>
+                                            {{ item.product.price }} {{currency}}
+                                        </div>
+
+                                        {% if item.product.specialPrice != null %}
+                                        <div class="products-el__price highlight">
+                                            <div>
+                                                {{ item.product.specialPrice }} {{currency}}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <a href="/{{ app.request.locale }}/product/{{ item.product.slug }}" class="products-el__photo">
+                                    {% if item.product.image != null %}
+                                        <img class="products-el__photo-img lazyloaded" src="/images/product/{{ item.product.image }}" alt="product-image">
+                                    {% else %}
+                                        <picture>
+                                            <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                            <img class="products-el__photo-img" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                                        </picture>
+                                    {% endif %}
+                                </a>
+                                <a href="/{{ app.request.locale }}/product/{{ item.product.slug }}" class="products-el__title">
+                                    {{ item.product.translate(app.request.locale).name }}
+                                </a>
+                            </div>
+                            <div class="products-el__footer">
+                                <div class="products-el__info">
+                                    <div class="products-el__info-wrapper">
+                                        {% if item.product.weight %}
+                                            <div class="products-el__info-item">
+                                                <div class="products-el__info-item-title">{% trans %}Weight{% endtrans %}</div>
+                                                <div class="products-el__info-item-divider">:</div>
+                                                <div class="products-el__info-item-value">{{ item.product.weight }} {% trans %}gram{% endtrans %}</div>
+                                            </div>
+                                        {% endif %}
+                                        {% if item.product.pieces %}
+                                            <div class="products-el__info-item">
+                                                <div class="products-el__info-item-title">{% trans %}Pieces{% endtrans %}</div>
+                                                <div class="products-el__info-item-divider">:</div>
+                                                <div class="products-el__info-item-value">{{ item.product.pieces }} {% trans %}pieces{% endtrans %}</div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                {% if product.isSalable %}
+                                <div class="products-el__qty">
+                                    <input class="products-el__qty-input" type="number" data-plugin-nice-number value="1" min="1" max="15">
+                                </div>
+                                {% endif %}
+                                
+                                <div class="products-el__add-to-cart products-el__add-to-cart--slider">
+                                    {% if item.product.isSalable %}
+                                        <a rel="nofollow" href="#" data-quantity="1" data-consider-qty data-product_id="{{ item.product.id }}" class="button product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart btn btn--product-cat" aria-label="Add to cart" onclick="checkout.addToCard({{ item.product.id }})">
+                                            {% trans %}Add to cart{% endtrans %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+
+        </div>
+    </div>
+{% else %}
+    <div class="section__title">
+        {% trans %}Your wishlist{% endtrans %}
+    </div>
+    <div class="section__subtitle">
+        {% trans %}You haven't added any items yet{% endtrans %}
+    </div>
+{% endif  %}
+
+<div id="response"></div>

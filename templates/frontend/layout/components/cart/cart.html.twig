@@ -1,0 +1,5 @@
+{% if quote.getQuoteItems()|length > 0 %}
+    {{ include('frontend/layout/components/cart/items.html.twig') }}
+{% else %}
+    {{ include('frontend/layout/components/cart/empty.html.twig') }}
+{% endif %}

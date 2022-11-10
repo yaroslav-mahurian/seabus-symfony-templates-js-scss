@@ -1,0 +1,7 @@
+.contacts {
+    @media (max-width: 1199px) {
+        .section__subtitle {
+            @include hide;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+.thwepo-extra-options {
+    padding: 10px;
+
+    & tbody {
+        width: 325px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    & tr {
+        width: 100%;
+        margin-top: 56px;
+        margin-left: 0;
+        padding: 16px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: #FFFFFF;
+        box-shadow: 0px 4px 11px rgba(0, 132, 170, 0.17);
+        border-radius: 100px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        @media (max-width: 1399px) {
+            padding: 10px 14px;
+        }
+
+        @media (max-width: 999px) {
+            margin-top: 35px;
+        }
+    }
+
+    .label.leftside {
+        & label {
+            margin-right: 16px;
+
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+
+            color: #02BFC5;
+        }
+       
+    }
+
+    @media (max-width: 1399px) {
+        & tbody {
+            width: 250px;
+        }
+        
+    }
+
+    @media (max-width: 999px) {
+
+        .label.leftside {
+            & label {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+

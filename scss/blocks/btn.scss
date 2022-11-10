@@ -1,0 +1,201 @@
+.btn, .form_option_ship_edit, .delete_ship_address, .olws-btn, .vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-footer-wrap .vi-wcaio-sidebar-cart-header-coupon-wrap button.vi-wcaio-bt-coupon-code, .vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-header-wrap .vi-wcaio-sidebar-cart-header-coupon-wrap .vi-wcaio-bt-coupon-code.button, .button {
+    display: inline-block;
+    padding: 0.54em 2.75em;
+    
+
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: inherit;
+    line-height: 157.2%;
+
+    color: #FFFFFF;
+    
+    background-color: #02BFC5;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    text-decoration: none;
+
+    transition: background-color .1s ease-out, box-shadow .1s ease-out;
+
+    &:hover {
+        text-decoration: none;
+        background-color:#0084aa;
+    }
+
+    &--ls {
+        letter-spacing: 0.165em;
+        padding: 0.48em 1.78em;
+    }
+
+    &--product-cat {
+        padding: 0.6em 1em;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 92%;
+
+        &:focus {
+            background-color: #0084aa;
+        }
+    }
+
+    &--prod-section {
+        padding: 0.75em 6.5em;
+        box-shadow: 0px 4px 11px rgba(0, 132, 170, 0.17);
+        border-radius: 100px;
+
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 29px;
+        text-align: center;
+
+        color: #FFFFFF;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    &--dark, &.olws-form__send-btn, &.olws-form__send-verify{
+        background-color: #0084AA;
+        
+        &:hover {
+            background-color: darken($color: #0084AA, $amount: 5%);
+        }
+    }
+
+    @media (max-width: 1599px) {
+        &--product-cat {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 1199px) {
+        padding: 0.2em 1em;
+        font-size: 14px;
+        line-height: 21px;
+        
+
+        color: #FFFFFF;
+
+        &--product-cat {
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 24px;
+            padding: 0.5em;
+        }   
+
+        &--prod-section {
+            padding: 0.75em 6.5em;
+        }
+
+        &--header-nav {
+            font-weight: bold;
+            font-size: 18px;
+            width: 100%;
+            line-height: 219.4%;
+            
+
+            .btn-title {
+                text-align: center;
+            }
+                
+                
+        }
+
+        &.olws-form__send-btn, &.olws-form__send-verify, &.olws-btn--close {
+            padding-top: 1em;
+            padding-bottom: 1em;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 99.4%;
+            letter-spacing: normal;
+
+            text-align: center;
+            text-transform: capitalize;
+
+            color: #FFFFFF;
+
+            background-color: #02BFC5;
+            &:hover {
+                background-color: darken($color: #02BFC5, $amount: 5%);
+            } 
+        }
+        
+        &.olws-btn--close {
+            padding: 1em 2em;
+            background-color: #0084AA;
+        
+            &:hover {
+                background-color: darken($color: #0084AA, $amount: 5%);
+            }
+        }
+
+        &--xl {
+            padding: 0.54em 2.75em;
+        }
+
+        &--full-w {
+            width: 100%;
+            text-align: center;
+        }
+
+        &--footer {
+            width: 100%;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: center;
+            text-transform: uppercase;
+
+            color: #FFFFFF;
+
+        }
+    }
+
+    
+    @media (max-width: 375px) {
+        font-size: 12px;
+        padding: 0.2em 0.7em;
+
+        &--header-nav {
+            font-size: 16px;
+        }
+
+        &--footer {
+            padding: 0.5em 4.5em;
+            font-size: 14px;
+        }
+
+        &--xl {
+            padding: 0.54em 0.75em;
+        }
+
+        &--prod-section {
+            padding: 0.75em 6.5em;
+        }
+    }
+}
+
+
+.btn-title {
+    white-space: nowrap;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    letter-spacing: inherit;
+    text-transform: inherit;
+
+    color: inherit;
+}
+
+.btn-lg {
+    .btn {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,160 @@
+.woocommerce-pagination {
+    margin-top: 50px;
+
+    @media (max-width: 1199px) {
+        margin-top: 30px;
+    }
+}
+
+.page-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & li {
+    margin-right: 10px;
+    width: 35px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #fff;
+    background-color: #02BFC5;
+    border-radius: 2px;
+
+    transition: background-color .1s ease-out, border-color .1s ease-out;
+    
+    &:last-child {
+        margin-right: 0;
+    }
+
+    & a {
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+
+        transition: color .1s ease-out;
+
+        text-decoration: none;
+    }
+
+    & span {
+        color: #fff;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+
+        transition: color .1s ease-out;
+    }
+
+    .page-pagination__arrow-img {
+        fill: #fff;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        background-color: #02BFC5;
+        border-color: #02BFC5;
+        background-color: darken($color: #02BFC5, $amount: 4%);
+        & span {
+            color: #fff;
+        }
+        & a {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+
+    & .current {
+            width: 100%;
+            height: 100%;
+            background-color: darken($color: #02BFC5, $amount: 4%);;
+            border-color: #02BFC5;
+            border-radius: 2px;
+            color: #fff;
+            cursor: default;
+
+        & span {
+            color: #fff;
+        }
+        & a {
+            color: #fff;
+        }
+        
+    }
+
+    }
+}
+
+.page-pagination__el {
+    margin-right: 10px;
+    width: 35px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #000;
+    background-color: #02BFC5;
+    border-radius: 2px;
+
+    transition: background-color .1s ease-out, border-color .1s ease-out;
+    
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        background-color: #02BFC5;
+        border-color: #02BFC5;
+        .page-pagination__el-number {
+            color: #fff;
+        }
+        .page-pagination__arrow-img {
+            fill: #fff;
+        }
+    }
+
+    &--active {
+        background-color: #02BFC5;
+        border-color: #02BFC5;
+        .page-pagination__el-number {
+            color: #fff;
+        }
+    }
+}
+
+.page-pagination__el-number {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+
+    transition: color .1s ease-out;
+}
+
+.page-pagination__el-arrow {
+    &--next {
+        transform: rotate(
+            -90deg
+            ) translate3d(0, -5%, 0);
+    }
+
+    &--prev {
+        transform: rotate(
+        90deg
+        ) translate3d(5%, -5%, 0);
+    }
+}
+
+.page-pagination__arrow-img {
+    fill: #000;
+}

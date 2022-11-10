@@ -1,0 +1,454 @@
+<form class="form form--checkout">
+    <div class="checkout-step checkout-step--shipping" data-checkout-step="1" style="display: none;">
+              
+        <!-- First / Last name -->
+        <div class="form__row">
+            <input name="shippingFirstName" class="form__input" data-validate data-checkout-form-input="firstName" id="shippingFirstName" type="text" placeholder="{% trans %}First name{% endtrans %}" value="{% if customer.getFirstName()  != null %} {{customer.getFirstName()}} {% endif %}">
+            {# <input name="shippingLastName" class="form__input form__input--half" data-validate data-checkout-form-input="lastName" id="shippingLastName" type="text" placeholder="{% trans %}Last name{% endtrans %}" value="{% if customer.getLastName()  != null %} {{customer.getLastName()}} {% endif %}"> #}
+        </div>
+
+        <!-- Phone -->
+        <div class="form__row">
+            <input name="shippingPhone" id="shippingPhone" data-validate data-checkout-form-input="phone" class="form__input" type="text" placeholder="{% trans %}Phone{% endtrans %}" value="{% if customer.getTelephone()  != null %} {{customer.getTelephone()}} {% endif %}">
+        </div>
+
+        <!-- Choose shipping method -->
+        <div class="form__row">
+            <fieldset>
+                <legend>{% trans %}Choose shipping method{% endtrans %}:</legend>
+                {% for shipping in shippingMethods %}
+                    <label>
+                        <input type="radio" class="input-radio switch" id="shipping_method_{{ shipping.code }}" name="shippingMethod" value="{{ shipping.code }}" checked="checked">
+                        {{ shipping.translate(app.request.locale).name }}
+                    </label>
+                {% endfor %}
+            </fieldset>
+        </div>
+
+        <!-- Street -->
+        <div class="form__row">
+            <input name="shippingStreet" id="shippingStreet" data-validate data-checkout-form-input="street" class="form__input" type="text" placeholder="{% trans %}Street name{% endtrans %}">
+        </div>
+
+        <!-- House number, Entrance -->
+        <div class="form__row">
+            <input name="shippingHouseNumber" id="shippingHouseNumber" data-validate data-checkout-form-input="house" class="form__input form__input--half" type="text" placeholder="{% trans %}House number{% endtrans %}">
+
+            <input name="shippingEntrance" id="shippingEntrance" class="form__input form__input--half" type="text" placeholder="{% trans %}Entrance{% endtrans %}">
+        </div>  
+
+        <!-- Floor, Apartment -->
+        <div class="form__row">
+            <input name="shippingFloor" id="shippingFloor" class="form__input form__input--half" type="text" placeholder="{% trans %}Floor{% endtrans %}">
+            <input name="shippingApartment" id="shippingApartment" class="form__input form__input--half" type="text" placeholder="{% trans %}Apartment, suite, unit, etc{% endtrans %}">
+        </div>
+
+        <div class="form__row">
+            <select class="form__input" name="shippingCity" id="shippingCity">
+                {% for city in cities %}
+                    {# {% if current_city.translate(app.request.locale).id != city.translate(app.request.locale).id  %} #}
+                    
+                    <option id="{{city.id}}" value="{{ city.translate(app.request.locale).name }}">{{ city.translate(app.request.locale).name }}</option>
+                    {# {% endif  %} #}
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Notes -->
+        <div class="form__row">
+            <textarea name="shippingNotes" id="shippingNotes" class="form__input" rows="2" placeholder="{% trans %}Notes about your order{% endtrans %}"></textarea>
+        </div>
+
+        <input id="quoteId" type="hidden" value="{{quote.id}}">
+        <input style="display: none; position: absolute; opacity: 0; appearance: 0;" name="streetId" id="streetId">
+    </div>
+    <div class="checkout-step checkout-step--payment" data-checkout-step="2" style="display: none;">
+        <!-- Date -->
+        <div class="form__row form__row--column">
+            <label class="form__label" for="shippingDate">
+                {% trans %}Choose shipping date and time{% endtrans %}:
+            </label>
+            <input name="shippingDate" class="form__input" type="text" id="shippingDate">
+        </div>
+
+        <!-- Number of people -->
+        <div class="form__row">
+            <label class="form__label" for="orderBeginnerChopsticks">
+                {% trans %}Beginner chopsticks quantity{% endtrans %}:
+            </label>
+            <input
+            data-nice-number 
+            type="number" name="orderBeginnerChopsticks" class="input-text" id="orderBeginnerChopsticks" placeholder="" value="0" min="0" max="15">
+        </div>
+
+        <!-- Chopsticks qty -->
+        <div class="form__row">
+            <label class="form__label" for="orderChopsticks">
+                {% trans %}Standart chopsticks quantity{% endtrans %}:
+            </label>
+            <input
+            data-nice-number 
+            type="number" name="orderChopsticks" class="input-text" id="orderChopsticks" placeholder="" value="0" min="0" max="15">
+        </div>
+
+        {# <div class="form-row form-row flex" id="additional_ginger" data-priority="">
+            <label for="additional_ginger" class="">{% trans %}Ginger{% endtrans %}: &nbsp;
+            </label>
+
+            <div class="nice-number">  
+                <span class="nice-number-minus" data-minus-qty-additional-product="<?php echo $ginger_additional_product_id ?>" type="button">-</span>
+                
+                <input type="number" class="input-text " value="0" min="0" max="15" style="pointer-events: none;" disabled="disabled" data-additional-product-input="<?php echo $ginger_additional_product_id ?>">
+
+                <div class="product type-product status-publish first instock product_cat-3- shipping-taxable product-type-simple" data-url="http://localhost/seabus/product-category/3-сеты/?add-to-cart=<?php echo $additional_ginger ?>" >
+                    <a rel="nofollow" data-item="additional_ginger" data-plus-qty-additional-product="<?php echo $ginger_additional_product_id ?>" href="?add-to-cart=<?php echo $ginger_additional_product_id ?>" data-quantity="1" data-product_id="<?php echo $ginger_additional_product_id ?>"  class="nice-number-plus product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart" aria-label="Add to cart">+</a>
+                </div>
+            </div>         
+
+        </div> #}
+        
+        {# {% if categories is defined %}
+            {% for category in categories %}
+                {% if category.id == "77" %}
+                    {% for product in category.getAnchoredProducts() %}
+                        {% if product.id == "223" %}
+                            <div class="form-row form-row flex" id="additional_souce" data-priority="">
+                                <label for="additional_souce" class="">{{ product.translate(app.request.locale).name }}: &nbsp;
+                                </label>
+                                <div class="nice-number nice-number--additional-product" {% for item in quote.getQuoteItems() %}{% if item.product.id == product.id %} data-item-id="{{item.id}}" data-value="{{item.getQty()}}"{% endif %}{% endfor %} data-additional-product="{{product.id}}">
+                                    <span class="nice-number-minus" data-minus-qty-additional-product type="button">-</span>
+                                    
+                                    <input type="number" class="input-text"
+                                    value="0" 
+                                    min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                                    <a style="text-decoration: none !important; " onclick="checkout.addToCard(223)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                                </div>         
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %} #}
+
+        <div class="cart__add-products">
+            <li class="vi-wcaio-sidebar-cart-pd-wrap">
+                <div class="vi-wcaio-sidebar-cart-pd-img-wrap vi-wcaio-sidebar-cart-pd-img-wrap--mobile-hidden">
+                    <a href="#">
+                        <img src="{{ asset('images/product/additional-products/imbir.jpg') }}" alt="">   
+                    </a>			
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                    <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                        <a href="#">
+                            {% trans %}Marinated Ginger 25 Gr.{% endtrans %}
+                        </a>					
+                        <div class="vi-wcaio-sidebar-cart-pd-remove-wrap">
+                            <a href="#" style="pointer-events: none !important; opacity: 0;">
+                                <svg width="15" fill="#0084aa" height="15" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title></title><g id="Fill"><polygon points="28.71 4.71 27.29 3.29 16 14.59 4.71 3.29 3.29 4.71 14.59 16 3.29 27.29 4.71 28.71 16 17.41 27.29 28.71 28.71 27.29 17.41 16 28.71 4.71"></polygon></g>
+                                </svg>
+                            </a>	
+                        </div>				
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-mobile-content-container">
+
+                        <div class="vi-wcaio-sidebar-cart-pd-mobile-content-wrap">
+                             <div class="vi-wcaio-sidebar-cart-pd-mobile-flex-wrap">
+                                <div class="vi-wcaio-sidebar-cart-pd-img-wrap">
+                                    <a href="#">
+                                        <img width="150" height="150" src="{{ asset('images/product/additional-products/imbir.jpg') }}" alt="">                           
+                                    </a>					
+                                </div>
+
+                                <div class="vi-wcaio-sidebar-cart-pd-attr">
+                                    <div class="products-el__info">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vi-wcaio-sidebar-cart-pd-mobile-desc">
+                                <div class="nice-number nice-number--additional-product" data-additional-product="393" data-item-id>
+                                    <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                                    
+                                    <input type="number" class="input-text"
+                                    value="0" 
+                                    min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                                    <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(393, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                                </div> 
+                                <div class="vi-wcaio-sidebar-cart-pd-price">
+                                    1,99 zł			
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="vi-wcaio-sidebar-cart-pd-desktop-content-container">
+
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-meta"></div>
+                    <div class="vi-wcaio-sidebar-cart-pd-desc">
+                        <div class="nice-number nice-number--additional-product" data-additional-product="393" data-item-id>
+                            <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                            
+                            <input type="number" class="input-text"
+                            value="0" 
+                            min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                            <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(393, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                        </div> 
+                        <div class="vi-wcaio-sidebar-cart-pd-price">
+                            1,99 zł			
+                        </div>
+                    </div>
+                </div>        
+            </li> 
+            <li class="vi-wcaio-sidebar-cart-pd-wrap">
+                <div class="vi-wcaio-sidebar-cart-pd-img-wrap vi-wcaio-sidebar-cart-pd-img-wrap--mobile-hidden">
+                    <a href="#">
+                        <img src="{{ asset('images/product/additional-products/sos.jpg') }}" alt="">   
+                    </a>			
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                    <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                        <a href="#">
+                            {% trans %}Soy Sauce 50 Gr.{% endtrans %}
+                        </a>					
+                        <div class="vi-wcaio-sidebar-cart-pd-remove-wrap">
+                            <a href="#" style="pointer-events: none !important; opacity: 0;">
+                                <svg width="15" fill="#0084aa" height="15" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title></title><g id="Fill"><polygon points="28.71 4.71 27.29 3.29 16 14.59 4.71 3.29 3.29 4.71 14.59 16 3.29 27.29 4.71 28.71 16 17.41 27.29 28.71 28.71 27.29 17.41 16 28.71 4.71"></polygon></g>
+                                </svg>
+                            </a>	
+                        </div>				
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-mobile-content-container">
+
+                        <div class="vi-wcaio-sidebar-cart-pd-mobile-content-wrap">
+                             <div class="vi-wcaio-sidebar-cart-pd-mobile-flex-wrap">
+                                <div class="vi-wcaio-sidebar-cart-pd-img-wrap">
+                                    <a href="#">
+                                        <img width="150" height="150" src="{{ asset('images/product/additional-products/sos.jpg') }}" alt="">                           
+                                    </a>					
+                                </div>
+
+                                <div class="vi-wcaio-sidebar-cart-pd-attr">
+                                    <div class="products-el__info">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vi-wcaio-sidebar-cart-pd-mobile-desc">
+                                <div class="nice-number nice-number--additional-product" data-additional-product="399" data-item-id>
+                                    <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                                    
+                                    <input type="number" class="input-text"
+                                    value="0" 
+                                    min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                                    <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(399, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                                </div> 
+                                <div class="vi-wcaio-sidebar-cart-pd-price">
+                                    1,99 zł			
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="vi-wcaio-sidebar-cart-pd-desktop-content-container">
+
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-meta"></div>
+                    <div class="vi-wcaio-sidebar-cart-pd-desc">
+                        <div class="nice-number nice-number--additional-product" data-additional-product="399" data-item-id>
+                            <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                            
+                            <input type="number" class="input-text"
+                            value="0" 
+                            min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                            <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(399, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                        </div> 
+                        <div class="vi-wcaio-sidebar-cart-pd-price">
+                            1,99 zł			
+                        </div>
+                    </div>
+                </div>        
+            </li> 
+            <li class="vi-wcaio-sidebar-cart-pd-wrap">
+                <div class="vi-wcaio-sidebar-cart-pd-img-wrap vi-wcaio-sidebar-cart-pd-img-wrap--mobile-hidden">
+                    <a href="#">
+                        <img src="{{ asset('images/product/additional-products/wasabi.jpg') }}" alt="">   
+                    </a>			
+                </div>
+
+                <div class="vi-wcaio-sidebar-cart-pd-info-wrap">
+                    <div class="vi-wcaio-sidebar-cart-pd-name-wrap">
+                        <a href="#">
+                            {% trans %}Wasabi 15 Gr.{% endtrans %}
+                        </a>					
+                        <div class="vi-wcaio-sidebar-cart-pd-remove-wrap">
+                            <a href="#" style="pointer-events: none !important; opacity: 0;">
+                                <svg width="15" fill="#0084aa" height="15" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title></title><g id="Fill"><polygon points="28.71 4.71 27.29 3.29 16 14.59 4.71 3.29 3.29 4.71 14.59 16 3.29 27.29 4.71 28.71 16 17.41 27.29 28.71 28.71 27.29 17.41 16 28.71 4.71"></polygon></g>
+                                </svg>
+                            </a>	
+                        </div>				
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-mobile-content-container">
+
+                        <div class="vi-wcaio-sidebar-cart-pd-mobile-content-wrap">
+                             <div class="vi-wcaio-sidebar-cart-pd-mobile-flex-wrap">
+                                <div class="vi-wcaio-sidebar-cart-pd-img-wrap">
+                                    <a href="#">
+                                        <img width="150" height="150" src="{{ asset('images/product/additional-products/wasabi.jpg') }}" alt="">                           
+                                    </a>					
+                                </div>
+
+                                <div class="vi-wcaio-sidebar-cart-pd-attr">
+                                    <div class="products-el__info">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vi-wcaio-sidebar-cart-pd-mobile-desc">
+                                <div class="nice-number nice-number--additional-product" data-additional-product="402" data-item-id>
+                                    <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                                    
+                                    <input type="number" class="input-text"
+                                    value="0" 
+                                    min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                                    <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(402, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                                </div> 
+                                <div class="vi-wcaio-sidebar-cart-pd-price">
+                                    1,99 zł			
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="vi-wcaio-sidebar-cart-pd-desktop-content-container">
+
+                    </div>
+
+                    <div class="vi-wcaio-sidebar-cart-pd-meta"></div>
+                    <div class="vi-wcaio-sidebar-cart-pd-desc">
+                        <div class="nice-number nice-number--additional-product" data-additional-product="402" data-item-id>
+                            <span class="nice-number-minus" data-minus-qty-additional-product type="button" style="margin-right: -4px;">-</span>
+                            
+                            <input type="number" class="input-text"
+                            value="0" 
+                            min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                            <a style="margin-left: -4px; text-decoration: none;" style="text-decoration: none !important; " onclick="checkout.addToCard(402, true)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+                        </div> 
+                        <div class="vi-wcaio-sidebar-cart-pd-price">
+                            1,99 zł			
+                        </div>
+                    </div>
+                </div>        
+            </li> 
+
+        </div>
+
+        
+
+
+        {# <div class="form-row form-row flex" id="additional_souce">
+            <label for="additional_souce" class="">{% trans %}Soy sauce{% endtrans %}: &nbsp;
+            </label>
+            <div class="nice-number nice-number--additional-product" data-additional-product="319" data-item-id>
+                <span class="nice-number-minus" data-minus-qty-additional-product type="button">-</span>
+                
+                <input type="number" class="input-text"
+                value="0" 
+                min="0" style="pointer-events: none;" disabled="disabled" data-additional-product-input>
+
+
+                <a style="text-decoration: none !important; " onclick="checkout.addToCard(319)" rel="nofollow" href="#" data-plus-additional-product-input class="nice-number-plus">+</a>
+
+            </div>         
+
+        </div> #}
+
+        <!-- Pet gift -->
+        {# <div class="form__row">
+            <fieldset>
+                <legend>{% trans %}Choose your gift{% endtrans %}:</legend>
+                <label>
+                    <input type="radio" class="input-radio switch" name="PetGift" id="orderGiftForCat" value="GiftForCat"> {% trans %}Gift for cat{% endtrans %}
+                </label> 
+
+                <label>
+                    <input type="radio" class="input-radio switch" name="PetGift" id="orderGiftForDog" value="GiftForDog"> {% trans %}Gift for dog{% endtrans %}
+                </label>
+
+                <label>
+                    <input type="radio" class="input-radio switch" name="PetGift" id="orderGiftNone" value="None" checked="checked"> {% trans %}I don't need{% endtrans %}
+                </label>
+            </fieldset>
+        </div> #}
+
+        <!-- Payment methods -->
+        <div class="form__row">
+            <fieldset class="fieldset has-description">
+                <legend>{% trans %}Available payment methods{% endtrans %}:</legend>
+                {% for payment in paymentMethods %}
+                    {% if payment.code == "Cash" %}
+                    <label>
+                        <input type="radio" class="input-radio switch " name="paymentMethod" value="{{ payment.code }}">
+                        {{ payment.translate(app.request.locale).name }}
+                    </label>
+                    <div class="form__input-description">
+                        <input name="onWhatAmountToPrepareChange" class="form__input" id="changeAmount" type="text" placeholder="{% trans %}On what amount to prepare change{% endtrans %}">
+                    </div>
+                    {% elseif payment.code == "Card" %}
+                    <label>
+                        <input type="radio" class="input-radio switch " name="paymentMethod" checked="checked" value="{{ payment.code }}">
+                        {{ payment.translate(app.request.locale).name }}
+                    </label>
+                    {% else %}
+                    <label>
+                        <input type="radio" class="input-radio switch " name="paymentMethod" value="{{ payment.code }}">
+                        {{ payment.translate(app.request.locale).name }}
+                    </label>
+
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+            
+        </div>
+    </div>
+
+    {# <input type="submit" id="checkoutPlaceOrder" style="display: none; opacity: 0;"> #}
+</form>

@@ -1,0 +1,25 @@
+@mixin pseudo-def {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+@mixin a-underline {
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin hide {
+  display: none;
+  opacity: 0;
+  position: absolute;
+}
+
+@mixin show {
+  display: block;
+  opacity: 1;
+  position: static;
+}

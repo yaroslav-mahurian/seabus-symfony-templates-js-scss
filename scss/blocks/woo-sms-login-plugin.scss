@@ -1,0 +1,103 @@
+.swal-overlay {
+    background: rgba(255,255,255,.9);
+}
+
+.swal-modal {
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 132, 170, 0.3);
+}
+
+.swal-title {
+    color: #0084AA;
+}
+
+.ma-login {
+    h3, h4, h5, h6 {
+        margin: 15px 0;
+        font-weight: normal !important;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: #02bfc5;
+    }
+}
+
+#display_with_country_code_select_box {
+    input[type=number] {
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    select#country_code {
+        width: auto !important;
+        height: auto !important;
+        padding-top: 5px;
+        background: transparent;
+        border: 0;
+        
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: lowercase;
+
+        color: rgba(35, 193, 239, 0.8);
+    }
+}
+
+#fma_lwp_verification_code_div {
+    input {
+        padding-bottom: 6px;
+        padding-top: 5px;
+        padding-left: 15px;
+        width: 100%;
+
+        border: 0;
+        border-bottom: 1px solid #7BE1FF;
+        background: transparent;
+        
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: lowercase;
+
+        color: rgba(35, 193, 239, 0.8);
+        transition: border-color .3s ease-out;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            font-size: 16px;
+            line-height: 24px;
+            text-transform: lowercase;
+
+            color: rgba(35, 193, 239, 0.8);
+        }
+    }
+    
+    h3 {
+        margin-top: 15px;
+    }
+}
+
+#fma_lwp_spinner_icon, #fma_lwp_spinner_code_verify_icon {
+    margin: 0 auto;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url(../img/icons/spinner.svg) center center / cover no-repeat;
+}
+
+#fma_lwp_continue_with_phone {
+    margin-top: 42px;
+
+    @media (max-width: 1199px) {
+            margin-top: 15px;
+    }
+}

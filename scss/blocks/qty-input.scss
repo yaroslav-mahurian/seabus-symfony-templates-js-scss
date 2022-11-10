@@ -1,0 +1,127 @@
+/* Cart plugin styles */
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi-wcaio-sidebar-cart-pd-quantity,.nice-number {
+    border: none;
+    border-radius: 2px;
+    user-select: none;
+}
+
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_minus, .nice-number-minus {
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    max-width: 30px;
+    padding: 0 !important;
+    background: #23C1EF !important;
+    color: #fff;
+    border: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+}
+
+.vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_qty, .nice-number input {
+    height: 35px;
+    display: inline-block;
+    width: auto !important;
+    min-width: 30px;
+    max-width: 30px;
+    border: none;
+
+    background: #EAFAFF;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 27px;
+    text-transform: capitalize;
+
+    color: #02BFC5;
+}
+
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_plus, .nice-number-plus {
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    max-width: 30px;
+    padding: 0 !important;
+
+    background: #0084AA !important;
+    color: #fff;
+    border: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+
+}
+
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_minus {
+    @media (max-width: 1919px) {
+        min-width: 20px;
+        max-width: 20px;
+        font-size: 16px;
+        height: 30px;
+    }
+
+    @media (max-width: 1199px) {
+        min-width: 30px;
+        max-width: 30px;
+        height: 35px;
+    }
+    
+}
+
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_qty {
+    @media (max-width: 1919px) {
+        min-width: 20px;
+        max-width: 20px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    @media (max-width: 1199px) {
+        min-width: 30px;
+        max-width: 30px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+.vi-wcaio-sidebar-cart .vi-wcaio-sidebar-cart-products .vi-wcaio-sidebar-cart-pd-desc .vi_wcaio_plus {
+    @media (max-width: 1919px) {
+        min-width: 20px;
+        max-width: 20px;
+        height: 30px;
+    }
+
+    @media (max-width: 1199px) {
+        min-width: 30px;
+        max-width: 30px;
+        height: 35px;
+    }
+}
+
+
+.checkout-custom-qty-fields {
+    & p {
+        padding: 0 !important;
+    }
+
+    label {
+        font-family: $main-font;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #02BFC5;
+
+        .optional {
+            display: none;
+        }
+    }
+}
+
+form.cart table.thwepo-extra-options input[type="number"] {
+    max-width: 20px;
+}

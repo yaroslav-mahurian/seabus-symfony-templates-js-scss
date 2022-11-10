@@ -1,0 +1,77 @@
+{% extends 'frontend/layout/base_layout.html.twig' %}
+
+{% set Title = 'ContactMetaTitle'|trans %}
+{% set Description = 'ContactMetaDescription'|trans %}
+
+{% block content %}
+
+    <div class="section__title">
+        {% trans %}Contact{% endtrans %}
+    </div>
+
+    <div class="section__subtitle">
+        {% trans %}All in a hand{% endtrans %} :)
+    </div>
+
+    {# MAP #}
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2056.609665423394!2d21.045238590453046!3d52.193692245534244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd706416d00f%3A0x7075a0cb66fa7f2c!2zQ2hyeXN0aWFuYSBQaW90cmEgQWlnbmVyYSA2LCAwMC03MTAgV2Fyc3phd2EsINCf0L7Qu9GM0YjQsA!5e0!3m2!1sru!2sua!4v1643707504390!5m2!1sru!2sua" width="100%" height="450" style="border:0; margin: 20px 0" allowfullscreen="" loading="lazy"></iframe>
+    {# <div class="contact-map">
+        <style>.container-iframe{
+            overflow: hidden;
+            border: 0px solid #555;   
+            }
+            .container-iframe > iframe{  
+                border: none;  
+                margin-top: -48px;
+            }
+
+        </style>
+        
+        <div class="container-iframe">
+            <iframe src="https://www.google.com/maps/embed/v1/place?key={{googleMapsApiKey}}&q=Chrystiana%20Piotra%20Aignera%206%2C%2000-710%20Warszawa&zoom=10" width="100%" height="480"></iframe>
+        </div>
+    </div> #}
+
+    <div class="flex-container">
+        <div class="flex-el-col-2">
+            <div class="section__subtitle">
+                {% trans %}Our socials{% endtrans %}:
+            </div>
+
+            <div class="section__p">
+                <a href="https://facebook.com/seabuspl/" class="header__nav-socials-el" target="_blank"> 
+                    <svg class="header__nav-socials-el-img" width="50" height="50" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="31" height="31" rx="2" fill="#02BFC5"></rect> <path d="M20.1399 30.9999V20.5085H23.383L23.8686 16.4198H20.1399V13.8093C20.1399 12.6256 20.4426 11.8188 22.0061 11.8188L24 11.8178V8.16093C23.655 8.11129 22.4715 8 21.0945 8C18.2197 8 16.2515 9.90534 16.2515 13.4046V16.4199H13V20.5086H16.2514V31L20.1399 30.9999Z" fill="white"></path> 
+                    </svg> 
+                </a> 
+                
+                <a href="https://instagram.com/seabus.pl" class="header__nav-socials-el" target="_blank"> 
+                    <svg class="header__nav-socials-el-img" width="50" height="50" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="31" height="31" rx="2" fill="#02BFC5"></rect> <path d="M25.9705 15.5744C25.9705 17.0526 25.9766 18.5309 25.9693 20.0091C25.9523 23.3778 23.3638 25.9659 20.0088 25.9708C17.0147 25.9744 14.0193 25.9744 11.0251 25.9708C7.6519 25.9671 5.0537 23.4021 5.03791 20.0383C5.02333 17.021 5.02333 14.0037 5.03791 10.9865C5.0537 7.59232 7.60331 5.04914 10.9959 5.03577C14.0108 5.02483 17.0256 5.02361 20.0404 5.03577C23.3917 5.05036 25.9474 7.6069 25.9681 10.9561C25.9778 12.4963 25.9705 14.0354 25.9705 15.5744ZM15.5157 7.01123C14.0581 7.01123 12.6005 7.00758 11.1429 7.01244C8.71232 7.01974 7.01541 8.71195 7.01177 11.136C7.00691 14.0536 7.00691 16.9712 7.01177 19.8876C7.01541 22.2387 8.70989 23.9686 11.0542 23.9819C14.0302 23.999 17.0062 24.0014 19.9809 23.9807C22.2876 23.9649 23.9833 22.2326 23.9906 19.9155C23.9991 16.9578 24.0003 14.0001 23.9906 11.0424C23.9833 8.73991 22.2572 7.02581 19.9493 7.01366C18.4711 7.00515 16.994 7.01123 15.5157 7.01123Z" fill="white"></path> <path d="M11.0363 15.4612C11.0436 12.4524 13.5179 10.0248 16.5667 10.0369C19.5439 10.0491 21.9757 12.5217 21.9684 15.5281C21.9599 18.5089 19.4904 20.9609 16.4987 20.9585C13.479 20.956 11.029 18.4907 11.0363 15.4612ZM16.5206 18.9429C18.4215 18.9332 19.9496 17.4051 19.9557 15.5062C19.9617 13.5927 18.3863 12.0124 16.4841 12.0233C14.605 12.0355 13.0575 13.5915 13.0466 15.4807C13.0356 17.3978 14.5953 18.9514 16.5206 18.9429Z" fill="white"></path> <path d="M22.3191 9.93052C22.3301 10.6271 21.8138 11.1729 21.1263 11.1924C20.4315 11.2118 19.8788 10.6952 19.8582 10.0071C19.8363 9.28135 20.3708 8.71364 21.0802 8.70877C21.764 8.70391 22.3082 9.24124 22.3191 9.93052Z" fill="white"></path> 
+                    </svg> 
+                </a>
+            </div>
+            
+        </div>
+        <div class="flex-el-col-2">
+            <div class="section__subtitle">
+                {% trans %}Working time{% endtrans %}:
+            </div>
+
+            <div class="flex-container">
+                <div class="flex-el-col-2 section__subtitle">{% trans %}Su-Th{% endtrans %}<p>12:00 - 22:00</p></div>
+                <div class="flex-el-col-2 section__subtitle">{% trans %}Fr-Sa{% endtrans %}<p>12:00-23:00</p></div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="section__p">
+        <div class="section__subtitle">
+            {% trans %}Phone{% endtrans %}:
+        </div>
+
+        <div class="section__subtitle">
+            <a style="color: #02bfc5;" href="tel:+48226022020">+48 226 022 020</a>
+        </div> 
+    </div>
+     
+{% endblock %}

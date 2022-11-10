@@ -1,0 +1,128 @@
+.nav__dropdown-separated {
+    color: rgba(2,191,197,0.8);
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &.is-active {
+        .nav__dropdown-separated-body {
+            display: block;
+        }
+    }
+
+    @media (max-width: 1199px) {
+        color: #0084AA;
+    }
+
+}
+
+.nav__dropdown-separated-header {
+    display: flex;
+    font-size: 14px;
+    user-select: none;
+}
+
+.nav__dropdown-separated-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 0.6em;
+    margin-left: 0.6em;
+
+    transform: translate3d(0, 5%, 0);
+}
+
+
+.dropdown-icon-mobile {
+    display: none;
+
+}
+
+.nav__dropdown-separated-body {
+    display: none;
+    padding: 0;
+    border-radius: 15px;
+    background-color: #ffffff;
+    list-style-type: none;
+    box-shadow: 0px 0px 11px rgba(0, 132, 170, 0.31);
+
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1500;
+    transform: translate3d(-50%, 0, 0);
+
+    @media (max-width: 1199px) {
+        box-shadow: -4px 4px 20px 0px rgba(34, 60, 80, 0.15);
+    }
+}
+
+.nav__dropdown-separated-item {
+    padding: 0.7em 1.35em;
+    padding-right: 3em;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0084AA;
+
+    border-bottom: 1px solid #02BFC5;
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.nav__dropdown-separated-link {
+    padding-left: 46px;
+    white-space: nowrap;
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 219.4%;
+
+    text-transform: capitalize;
+
+    color: #0084AA;
+    position: relative;
+
+    transition: color .3s ease-out;
+
+    text-decoration: none;
+    
+    &:hover {
+        text-decoration: none;
+
+        &:before {
+            background: #0084AA;
+            box-shadow: 0px 0px 0px 3px rgba(255, 255, 255, 1) inset;
+        }
+    }
+    
+
+    &:before {
+        @include pseudo-def;
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid #0084AA;
+
+        left: 0;
+        top: 50%;
+
+        transition: background .1s ease-out;
+
+        transform: translate3d(0, -50%, 0);
+    }
+
+    &.is-active {
+        &:before {
+            background: #0084AA;
+            box-shadow: 0px 0px 0px 3px rgba(255, 255, 255, 1) inset;
+        }
+    }
+
+    @media (max-width: 1199px) {
+        font-size: 14px;
+    } 
+}

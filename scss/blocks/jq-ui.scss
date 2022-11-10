@@ -1,0 +1,161 @@
+.ui-datepicker {
+    box-shadow: 5px 5px 18px 4px rgba(0, 0, 0, 0.1);
+
+    font-family: $main-font;
+    font-weight: bold !important;
+
+    & a {
+        font-weight: bold !important;
+    }
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+    &.ui-state-hover {
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer;
+    }
+}
+
+.timeselector {
+    padding: 8px !important; 
+    background-color: #fff !important;
+    box-shadow: 5px 5px 18px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px !important;
+    border: none !important;
+}
+
+.timeselector-separator {
+    color: #0084AA !important;
+    font-size: 20px !important;
+}
+
+.timeselector-button {
+    border: none !important;
+    padding: 4px 8px !important;
+}
+
+.timeselector-value {
+    padding: 4px 8px !important;
+    background-color: #EAFAFF !important; 
+    color: #02BFC5 !important;
+}
+
+.timeselector-button  {
+    color: #EAFAFF !important;
+
+    &.timeselector-down {
+        background-color: #23C1EF;
+        
+        &:hover {
+            background-color: darken(#23C1EF, 5%);
+        }
+    }
+
+    &.timeselector-up {
+        background-color: #0084AA;
+
+        &:hover {
+            background-color: darken(#0084AA, 5%);
+        }
+    }
+
+    &:hover {
+        color: #EAFAFF !important;
+    }
+}
+
+
+.ui-timepicker-div {
+    & select, input {
+        background: #fff !important;
+        border: none !important;
+        border-bottom: 1px solid #7BE1FF !important;
+        color: rgba(35,193,239,0.8) !important;
+    }
+}
+
+.ui-datepicker-buttonpane, .ui-datepicker-current, .ui-datepicker-close {
+    display: none !important;
+    @include hide;
+}
+
+.ui-timepicker-div dl, .ui-timepicker-div dt {
+    font-size: 16px;
+    line-height: 24px;
+    color: #02BFC5;
+}
+
+.ui-autocomplete {
+    width: 270px !important;
+    border-radius: 2px;
+    box-shadow: 5px 5px 18px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1500 !important;
+    max-height: 180px;
+    overflow-y: auto;
+    position: fixed !important;
+
+    .ui-menu-item {
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+        color: rgba(35,193,239,0.8);
+    }
+
+    .ui-menu-item-div {
+        cursor: pointer;
+        padding: 5px 10px;
+
+        &.ui-state-active {
+            border: none !important;
+        }
+    }
+
+    @media (max-width: 1919px) {
+        width: 200px !important;
+    }
+
+    @media (max-width: 1199px) {
+        width: 250px !important;
+    }
+}
+
+.ui-front {
+    z-index: 3000;
+}
+.ui-widget-overlay {
+    background: #fff;
+}
+
+.ui-widget {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.ui-widget.ui-widget-content {
+    border-radius: 20px;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+}
+
+.ui-widget-content {
+    border: none;
+    color: #23C1EF;
+}
+
+.ui-widget-header {
+    border: none;
+}
+
+.ui-dialog-buttonset {
+    .ui-button {
+        border-radius: 20px;
+        border: none;
+        box-shadow: none;
+
+        &:hover, &:focus {
+            border: none;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{% extends 'frontend/layout/base_layout.html.twig' %}
+
+{% set Title = 'WishlistMetaTitle'|trans %}
+{% set Description = 'WishlistMetaDescription'|trans %}
+
+{% block content %}
+
+    {% include 'frontend/layout/components/wishlist/items.html.twig' %}
+
+{% endblock %}

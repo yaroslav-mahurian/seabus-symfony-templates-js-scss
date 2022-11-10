@@ -1,0 +1,286 @@
+{% extends 'frontend/layout/base_layout.html.twig' %}
+
+{% if product.translate(app.request.locale).metaTitle %}
+    {% set Title = product.translate(app.request.locale).metaTitle %}
+{% endif %}
+
+{% if product.translate(app.request.locale).metaDescription %}
+    {% set Description = product.translate(app.request.locale).metaDescription %}
+{% endif %}
+
+{% block content %}
+
+
+    <section data-product-page="" data-product-type="simple" class="product-section">
+        <nav class="breadcrumbs">
+            <a href="/">{% trans %}Home{% endtrans %}</a>
+            &nbsp;{#/&nbsp;
+            <a href="https://www.seabus.pl/kategoria-produktu/category/{{ product.category.slug}}">
+                {{ product.category.translate(app.request.locale).name }}
+            </a>#}
+            &nbsp;/&nbsp;
+            {{ product.translate(app.request.locale).name }}
+        </nav>
+        <h1 class="product__title">{{ product.translate(app.request.locale).name }}</h1>
+        <div class="product">
+            <div class="product__wrapper">
+                <div class="product__photo">
+                    <a class="product__image" href="/images/product/{{ product.image }}" data-fancybox data-caption="">
+                        {% if product.image != null %}
+                            <img
+                                    class="product__img"
+                                    src="/images/product/{{ product.image }}"
+                                    alt="product-image"
+                            />
+                        {% else %}
+                            <picture>
+                                <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                <img class="products-el__photo-img" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                            </picture>
+                        {% endif %}
+                    </a>
+                    <div class="product__footer">
+                        <div class="product__attr-wrapper">
+                            {% if product.weight %}
+                                <div class="product__attr"><span class="product__attr-title">{% trans %}Weight{% endtrans %}:</span> <span class="product__attr-value">{{ product.weight }}</span> <span class="product__attr-unit">{% trans %}gram{% endtrans %}</span></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="product__content">
+                    {% if product.getIngredients()|length %}
+                        <div class="product__composition">
+                            <span class="product__attr-title">{% trans %}Ingredients{% endtrans %}:</span>
+                            <div class="product__composition-wrapper">
+                                <div class="swiper-container product-composition-slider">
+                                    <div class="swiper-wrapper">
+                                        {% for ingredient in product.getIngredients() %}
+                                            <div class="swiper-slide">
+                                                <div class="product__composition-el">
+
+                                                    <img
+                                                            class="product__composition-el-photo"
+                                                            src="/images/ingredient/{{ ingredient.image }}"
+                                                            alt="ingredient"
+                                                    />
+                                                    <div class="product__composition-el-text">{{ ingredient.translate(app.request.locale).name }}</div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="slider-nav-prev swiper-button-disabled swiper-button-lock" id="productCompositionNavPrev">
+                                        <svg width="17" height="7" viewBox="0 0 17 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.007 0L0.551331 0.995854L8.69321 6.56588L16.8351 0.995854L15.3794 0L8.69321 4.57418L2.007 0Z" fill="#02BFC5"/>
+                                        </svg>
+                                    </div>
+                                    <div class="slider-nav-next swiper-button-disabled swiper-button-lock" id="productCompositionNavNext">
+                                        <svg width="17" height="7" viewBox="0 0 17 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.007 0L0.551331 0.995854L8.69321 6.56588L16.8351 0.995854L15.3794 0L8.69321 4.57418L2.007 0Z" fill="#02BFC5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if product.getSetItems()|length %}
+                        <div class="product__composition">
+                            <span class="product__attr-title">{% trans %}Includes{% endtrans %}:</span>
+                            <div class="product__composition-wrapper">
+                                <div class="swiper-container product-composition-slider">
+                                    <div class="swiper-wrapper">
+                                        {% for item in product.getSetItems() %}
+                                            <div class="swiper-slide">
+                                                <div class="product__composition-el">
+                                                    <a class="link-no-underline" href="/{{ app.request.locale }}/product/{{ item.slug }}">
+                                                        <img
+                                                            class="product__composition-el-photo"
+                                                            src="/images/product/{{ item.image }}"
+                                                            alt="prod-img"
+                                                        />
+                                                        <div class="product__composition-el-text">{{ item.translate(app.request.locale).name }}</div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="slider-nav-prev swiper-button-disabled swiper-button-lock" id="productCompositionNavPrev">
+                                        <svg width="17" height="7" viewBox="0 0 17 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.007 0L0.551331 0.995854L8.69321 6.56588L16.8351 0.995854L15.3794 0L8.69321 4.57418L2.007 0Z" fill="#02BFC5"/>
+                                        </svg>
+                                    </div>
+                                    <div class="slider-nav-next swiper-button-disabled swiper-button-lock" id="productCompositionNavNext">
+                                        <svg width="17" height="7" viewBox="0 0 17 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.007 0L0.551331 0.995854L8.69321 6.56588L16.8351 0.995854L15.3794 0L8.69321 4.57418L2.007 0Z" fill="#02BFC5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="product__desc">
+                        <div class="term-description"></div>
+                    </div>
+                        <div class="product__add-to-cart">
+                            <div class="product__price-wrapper">
+                                <span class="product__price-title">{% trans %}Price{% endtrans %}:</span>
+ 
+                                <div class="products-el__price-container">
+                                    <div class="price product__price" {% if product.specialPrice != null %}style="text-decoration: line-through"{% endif %}>
+                                        {{ product.price }} {{currency}}
+                                    </div>
+
+                                    {% if product.specialPrice != null %}
+                                    <div class="price product__price highlight">
+                                        <div>
+                                            {{ product.specialPrice }} {{currency}}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if product.isSalable %}
+                                <a href="#" onclick="checkout.addToCard({{ product.id }})">
+                                    <button type="submit" name="add-to-cart" value="282" class="single_add_to_cart_button btn btn--prod-section btn--dark">{% trans %}Add to cart{% endtrans %}</button>
+                                </a>
+                            {% endif %}
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if product.getRelatedProducts()|length %}
+        <div class="product__cross-sells">
+            <h2 class="section__title">{% trans %}You maybe interested in{% endtrans %}:</h2>
+            <div class="swiper-container product-cross-sell-slider swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-free-mode">
+                <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+                    {% for related in product.getRelatedProducts() %}
+                        {% if related.isActive %}
+                            <div class="swiper-slide">
+                                {% set categories = [] %}
+                                {% for cat in related.getCategories() %}
+                                    {% set categories = categories|merge([cat.name]) %}
+                                {% endfor %}
+                                <div class="products-el" data-product-id="{{related.id}}" data-name="{{ related.translate(app.request.locale).name }}" data-price="{{ (related.specialPrice) ? related.specialPrice : related.price }}" data-category="{{categories|join('/')}}"  data-list="Related"> 
+                                    <div class="prod-cat-product__wrapper">
+                                        <div class="products-el__top">
+                                            <div class="products-el__header">
+                                                <div class="products-el__fav">
+                                                    <a href="#" data-wishlist-btn onclick="wishlist.addToWishlist({{ related.id }})">
+                                                        <svg class="fav-icon-no-fill" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.57221 0.292256C5.23853 0.0651528 5.9361 0.000137329 6.55296 0.000137329C8.01769 0.000137329 9.12203 0.625464 10.0005 1.2531C10.8859 0.620652 11.9829 0.000127554 13.4649 0.000137329C14.1237 0.000137329 14.7977 0.0922275 15.4508 0.309494C19.4402 1.60178 20.7253 5.89705 19.6114 9.42532L19.6067 9.44018L19.6016 9.45489C18.9852 11.2145 17.9772 12.8215 16.6548 14.1362L16.6491 14.1419L16.6433 14.1474C14.7965 15.9254 12.7227 17.5315 10.5148 18.8573L9.99353 19.1703L9.47576 18.8516C7.27266 17.4953 5.23794 15.9323 3.36874 14.1398L3.36103 14.1325L3.35348 14.1249C2.04238 12.8127 1.03447 11.2175 0.40889 9.45955L0.403659 9.44485L0.398889 9.42999C-0.736464 5.89402 0.555061 1.60389 4.57221 0.292256ZM6.55296 2.00014C6.05963 2.00014 5.59908 2.05448 5.21316 2.18678L5.20573 2.18933L5.19826 2.19176C2.51011 3.06633 1.40905 6.01167 2.29844 8.80389C2.82404 10.2739 3.66728 11.6071 4.76086 12.7038C6.37537 14.2511 8.12197 15.6184 10.0056 16.823C11.8831 15.6438 13.6551 14.2473 15.2503 12.7123C16.3496 11.6177 17.1916 10.2778 17.7088 8.80858C18.5859 6.00785 17.4776 3.06644 14.8313 2.21114L14.8224 2.20826L14.8224 2.20822C14.3987 2.06688 13.9403 2.00014 13.4649 2.00014C12.3741 2.00013 11.62 2.52512 10.6049 3.29626L9.99902 3.75658L9.39382 3.29531C8.3949 2.53395 7.62429 2.00014 6.55296 2.00014Z" fill="#0A84AA"></path>
+                                                        </svg>
+
+                                                        <svg style="display: none;" class="fav-icon-fill" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.57184 0.292271C5.23816 0.0651681 5.93573 0.000152588 6.55259 0.000152588C8.01732 0.000152588 9.12166 0.625479 10.0001 1.25312C10.8856 0.620667 11.9825 0.000142813 13.4645 0.000152588C14.1234 0.000152588 14.7973 0.0922427 15.4504 0.30951C19.4399 1.60179 20.7249 5.89706 19.6111 9.42534L19.6064 9.4402L19.6012 9.4549C18.9848 11.2145 17.9769 12.8215 16.6544 14.1362L16.6487 14.1419L16.643 14.1474C14.7962 15.9254 12.7223 17.5315 10.5144 18.8573L9.99317 19.1703L9.4754 18.8516C7.2723 17.4953 5.23758 15.9324 3.36838 14.1399L3.36067 14.1325L3.35312 14.1249C2.04202 12.8127 1.0341 11.2175 0.408524 9.45957L0.403292 9.44487L0.398522 9.43001C-0.736831 5.89403 0.554695 1.6039 4.57184 0.292271Z" fill="#0084AA"/>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                                <div class="products-el__price">
+                                                    {{ related.price }} {{currency}}
+                                                </div>
+                                            </div>
+                                            <a href="/{{ app.request.locale }}/product/{{ related.slug }}" class="products-el__photo"> <noscript>
+                                                    <img class="products-el__photo-img" src="" alt="product-image"></noscript>
+                                                {% if related.image != null %}
+                                                    <img class="products-el__photo-img lazyloaded" src="/images/product/{{ related.image }}" alt="product-image">
+                                                {% else %}
+                                                    <picture>
+                                                        <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                                        <img class="products-el__photo-img" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                                                    </picture>
+                                                {% endif %}
+                                            </a>
+                                            <a href="/{{ app.request.locale }}/product/{{ related.slug }}" class="products-el__title"> {{ related.translate(app.request.locale).name }} </a>
+                                        </div>
+                                        <div class="products-el__footer">
+                                            <div class="products-el__info">
+                                                <div class="products-el__info-wrapper">
+                                                    {% if related.weight %}
+                                                        <div class="products-el__info-item">
+                                                            <div class="products-el__info-item-title">{% trans %}Weight{% endtrans %}</div>
+                                                            <div class="products-el__info-item-divider">:</div>
+                                                            <div class="products-el__info-item-value">{{ related.weight }} {% trans %}gram{% endtrans %}</div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if related.pieces %}
+                                                        <div class="products-el__info-item">
+                                                            <div class="products-el__info-item-title">{% trans %}pieces{% endtrans %}</div>
+                                                            <div class="products-el__info-item-divider">:</div>
+                                                            <div class="products-el__info-item-value">{{ related.pieces }}</div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="products-el__add-to-cart products-el__add-to-cart--slider">
+                                                
+                                                {% if related.isSalable %}
+                                                    <a rel="nofollow" onclick="checkout.addToCard({{ related.id }})" href="#" class="button btn btn--product-cat" aria-label="Add to cart">
+                                                        <div class="btn-title">{% trans %}Add to cart{% endtrans %}</div>
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="slider-nav-prev slider-nav-prev--full-w swiper-button-disabled swiper-button-lock" id="productCrossSellNavPrev">
+                    <img class="lazyload-disable" src="https://www.seabus.pl/wp-content/themes/seabus/assets/img/icons/arrow-down.svg" alt="" />
+                </div>
+                <div class="slider-nav-next slider-nav-next--full-w swiper-button-disabled swiper-button-lock" id="productCrossSellNavNext">
+                    <img class="lazyload-disable" src="https://www.seabus.pl/wp-content/themes/seabus/assets/img/icons/arrow-down.svg" alt="" />
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% set categories = [] %}
+    {% for cat in product.getCategories() %}
+        {% set categories = categories|merge([cat.name]) %}
+    {% endfor %}
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'ecommerce': {
+                'currencyCode': 'PLN',
+                'detail': {
+                    'actionField': {'list': 'List 1'},
+                    'products': [{
+                        'name': '{{ product.translate(app.request.locale).name }}',
+                        'id': {{product.id}},
+                        'price': {{ (product.specialPrice) ? product.specialPrice : product.price }},
+                        'brand': 'Seabus',
+                        'category': '{{categories|join('/')}}',
+                        'affiliation': 'Warsaw'
+                    }]
+                },
+            },
+            'ecomm_prodid': {{product.id}},
+            'ecomm_pagetype': 'Product',
+            'ecomm_category': '{{categories|join('/')}}',
+            'ecomm_totalvalue': {{ (product.specialPrice) ? product.specialPrice : product.price }},
+            'event': 'gtm-ee-event',
+            'gtm-ee-event-category': 'Enhanced Ecommerce',
+            'gtm-ee-event-action': 'Product Details',
+            'gtm-ee-event-non-interaction': 'True',
+        });
+
+        fbq('track', 'ViewContent', { 
+            content_type: 'product',
+            content_ids: ['{{product.id}}'],
+            content_name: '{{ product.translate(app.request.locale).name }}',
+            content_category: '{{categories|join('/')}}',
+            value: {{ (product.specialPrice) ? product.specialPrice : product.price }},
+            currency: 'PLN'
+        });
+
+    </script>
+{% endblock %}

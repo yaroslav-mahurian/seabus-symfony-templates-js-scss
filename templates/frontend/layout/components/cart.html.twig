@@ -1,0 +1,28 @@
+<div class="cart__wrap">
+    <div style="opacity: 0; display: none; position: absolute;" class="hidden-map">
+        {# <input id="pac-input" class="controls" type="text"
+            placeholder="Enter a location">	 #}
+        <div id="map"></div>
+    </div>
+    
+    <div class="cart__header">
+        <div class="vi-wcaio-sidebar-cart-header-title-wrap {% if quote.getQuoteItems()|length > 0 %}is-visible{% endif %}">
+            {% trans %}Your order{% endtrans %}
+        </div>
+        <div class="cart__close">
+            <svg fill="#02BFC5" width="15" height="15" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><g id="Fill"><polygon points="28.71 4.71 27.29 3.29 16 14.59 4.71 3.29 3.29 4.71 14.59 16 3.29 27.29 4.71 28.71 16 17.41 27.29 28.71 28.71 27.29 17.41 16 28.71 4.71"/></g></svg>
+        </div>
+    </div>
+    <div class="cart__content">
+        <div class="cart__content-wrap">
+            <div class="quote-items">
+                {{ include('frontend/layout/components/cart/cart.html.twig') }}
+            </div>
+            {{ include('frontend/layout/components/cart/checkout.html.twig') }}
+        </div>
+    </div>
+
+    <div class="cart__footer">
+        {{  include('frontend/layout/components/cart/footer.html.twig') }}
+    </div>
+</div>

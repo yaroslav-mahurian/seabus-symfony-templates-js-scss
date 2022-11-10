@@ -1,0 +1,259 @@
+{% extends 'frontend/layout/base_layout.html.twig' %}
+
+{# {% set Title = 'Seabus home' %} #}
+
+{% block content %}
+
+<div class="ty">
+             
+    <div class="wc-thankyou">
+        <div class="woocommerce-order">
+
+            <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
+                {% trans %}Thank you{% endtrans %}, {{order.shippingFirstName}}. {% trans %}Your order has been received{% endtrans %}.
+            </p>
+
+            <h2 class="woocommerce-order-details__title">{% trans %}Order details{% endtrans %}</h2>
+
+            <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+
+                <li class="woocommerce-order-overview__order order">
+                    {% trans %}Order Number{% endtrans %}: <strong> {{order.id}}</strong>
+                </li>
+
+                <li class="woocommerce-order-overview__date date">
+                    {% trans %}Date{% endtrans %}: <strong>{{order.deliveryDate|date('d-m-Y H:i')}}</strong>
+                </li>
+
+                <li class="woocommerce-order-overview__total total">
+                    {% trans %}Total{% endtrans %}: <strong><span class="woocommerce-Price-amount amount">{{order.grandTotal|number_format(2)}}&nbsp;{{currency}}</span>
+                </li>
+
+                <li class="woocommerce-order-overview__payment-method method">
+                    {% trans %}Payment method{% endtrans %}: <strong>{{order.paymentMethod}}</strong>
+                </li>
+
+            </ul>
+
+            <section class="woocommerce-order-details">
+
+                <h2 class="woocommerce-order-details__title"> {% trans %}Items ordered{% endtrans %}</h2>
+
+                <div class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+
+
+                    <h3 class="woocommerce-ts__title">{% trans %}Product{% endtrans %}</h3>
+
+                    <div class="thankyou_products">
+                        {% for item in order.getOrderItems() %}
+                        <div class="thankyou_product">
+                            <div class="ts-product-image">
+                                {% if item.product.image != null %}
+                                    <img class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" src="{{ imageHelper.getProductThumbnailPath(item.product) }}" alt="product-image">
+                                {% else %}
+                                    <picture>
+                                        <source type="image/webp" srcset="{{ asset('images/product/thumb/image-thumb.webp') }}">
+                                        <img class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" src="{{ asset('images/product/thumb/image-thumb.jpg') }}" alt="product-image">
+                                    </picture>
+                                {% endif %}
+                            </div>
+                            <div class="product-info">
+                                <div class="ts-product-title">
+                                    <a href="/{{ app.request.locale }}/product/{{ item.product.slug }}">
+                                        {{ item.product.translate(app.request.locale).name }}
+                                    </a> 
+                                    <strong class="product-quantity">×&nbsp;{{ item.qty }}</strong>
+                                </div>
+                                <span class="woocommerce-Price-amount amount">{{ item.subtotal|number_format(2) }}&nbsp;{{currency}}</span>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <div class="ty__total">
+        <h3 class="woocommerce-ts__title">{% trans %}Total{% endtrans %}</h3>
+        <div class="woocommerce-ts__totals">
+            {% if order.comment != null %}
+                <div class="woocommerce-ts__totals-el">
+                    <div class="woocommerce-ts__totals-label">
+                        {% trans %}Note{% endtrans %}: 
+                    </div>
+
+                    <div class="woocommerce-ts__totals-label">
+                    {{order.comment}}
+                    </div>
+
+                </div>
+            {% endif %}
+            
+
+            <div class="woocommerce-ts__totals-el">
+                <div class="woocommerce-ts__totals-label">
+                    {% trans %}Subtotal{% endtrans %}: </div>
+
+                <div class="woocommerce-ts__totals-label">
+                    <span class="woocommerce-Price-amount amount">{{order.subtotal|number_format(2)}}&nbsp;{{currency}}</span> 
+                </div>
+
+            </div>
+
+
+            <div class="woocommerce-ts__totals-el">
+                <div class="woocommerce-ts__totals-label">
+                    {% trans %}Shipping{% endtrans %}: </div>
+
+                <div class="woocommerce-ts__totals-label">
+                    {{order.shippingMethod}}
+                </div>
+
+            </div>
+
+            {% if order.shippingPrice != null %}
+                <div class="woocommerce-ts__totals-el">
+                    <div class="woocommerce-ts__totals-label">
+                        {% trans %}Shipping cost{% endtrans %}: 
+                    </div>
+
+                    <div class="woocommerce-ts__totals-label">
+                        <span class="woocommerce-Price-amount amount">{{order.shippingPrice|number_format(2)}}&nbsp;{{currency}}</span>
+                    </div>
+
+                </div>
+            {% endif %}
+
+            {# <div class="woocommerce-ts__totals-el">
+                <div class="woocommerce-ts__totals-label">
+                    {% trans %}Payment method{% endtrans %}: 
+                </div>
+
+                <div class="woocommerce-ts__totals-label">
+                    {{order.paymentMethod}} 
+                </div>
+
+            </div> #}
+
+
+            <div class="woocommerce-ts__totals-el">
+                <div class="woocommerce-ts__totals-label">
+                    {% trans %}Total{% endtrans %}: 
+                </div>
+
+                <div class="woocommerce-ts__totals-label">
+                    <span class="woocommerce-Price-amount amount">{{order.grandTotal|number_format(2)}}&nbsp;{{currency}}</span> 
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <section class="woocommerce-customer-details">
+
+        <section class="woocommerce-columns woocommerce-columns--2 woocommerce-columns--addresses col2-set addresses">
+
+            <div class="woocommerce-column">
+                <h2 class="woocommerce-order-details__title">{% trans %}Shipping address{% endtrans %}</h2>
+                <div class="ts-address-cols">
+                    <div class="ts-address-col">
+                        <div class="ts-address-row">
+                            {{order.shippingFirstName}} {# {{order.shippingLastName}} #} 
+                        </div>
+
+                        <div class="ts-address-row">
+                            {{order.shippingTelephone}}   
+                        </div>
+
+                    </div>
+
+                    <div class="ts-address-col">
+                        {% if order.shippingMethod.code == 'delivery' %}
+                            <div class="ts-address-row">
+                                {% if order.shippingStreet != null %}
+                                    {{order.shippingStreet.name}}
+                                {% endif %}, 
+                                {% if order.shippingBuildingNo != null %}
+                                    {% trans %}House number{% endtrans %}: {{order.shippingBuildingNo}}
+                                {% endif %}
+                            </div>
+
+                            <div class="ts-address-row">
+                                {% if order.shippingEntrance != null %}
+                                    {% trans %}Entrance{% endtrans %}: {{order.shippingEntrance}}
+                                {% endif %}
+                                {% if order.shippingFloor != null %}
+                                    {% trans %}Floor{% endtrans %}: {{order.shippingFloor}}
+                                {% endif %}
+                            </div>
+
+                            <div class="ts-address-row">
+                                {% if order.shippingFlat != null %}
+                                    {% trans %}Apartment, suite, unit, etc{% endtrans %}: {{order.shippingFlat}}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="ts-address-row">
+                                {{order.shippingMethod}}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div><!-- /.col-2 -->
+
+        </section><!-- /.col2-set -->
+
+
+
+    </section>
+	
+
+    <div class="ty-socials">
+        <h2 class="woocommerce-notice">
+            {% trans %}Thank you, the order has been accepted. Join our social groups and be the first to know about discounts and new products!{% endtrans %} 
+        </h2>
+
+        <div class="ty-socials-wrapper">
+            <a href="https://www.facebook.com/seabus.pl" class="ty-socials-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="2" fill="#0084AA"></rect>
+                    <path
+                        d="M16.5436 21.9999V14.7016H18.6074L18.9164 11.8573H16.5436V10.0413C16.5436 9.21779 16.7362 8.65655 17.7311 8.65655L19 8.65585V6.11195C18.7805 6.07742 18.0273 6 17.151 6C15.3216 6 14.0692 7.32545 14.0692 9.75971V11.8573H12V14.7016H14.0691V22L16.5436 21.9999Z"
+                        fill="white"></path>
+                </svg>
+            </a>
+            <a href="https://instagram.com/seabus.pl" class="ty-socials-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="2" fill="#0084AA"></rect>
+                    <g clip-path="url(#clip0)">
+                        <path
+                            d="M19.9981 12.0565C19.9981 13.1857 20.0028 14.3149 19.9972 15.4441C19.9842 18.0173 18.007 19.9943 15.4442 19.998C13.157 20.0008 10.8689 20.0008 8.58177 19.998C6.0051 19.9952 4.02041 18.0359 4.00835 15.4664C3.99722 13.1616 3.99722 10.8568 4.00835 8.55194C4.02041 5.95925 5.96799 4.01659 8.5595 4.00638C10.8624 3.99802 13.1654 3.99709 15.4683 4.00638C18.0283 4.01752 19.9805 5.97039 19.9963 8.52872C20.0037 9.70527 19.9981 10.8809 19.9981 12.0565ZM12.0121 5.51537C10.8986 5.51537 9.7852 5.51259 8.67177 5.5163C6.81512 5.52187 5.51891 6.8145 5.51612 8.66616C5.51241 10.8948 5.51241 13.1235 5.51612 15.3512C5.51891 17.1472 6.81327 18.4686 8.60404 18.4788C10.8773 18.4918 13.1505 18.4937 15.4229 18.4779C17.1849 18.4658 18.4802 17.1425 18.4857 15.3726C18.4922 13.1133 18.4932 10.854 18.4857 8.59465C18.4802 6.83586 17.1617 5.52652 15.3987 5.51723C14.2695 5.51073 13.1413 5.51537 12.0121 5.51537Z"
+                            fill="white"></path>
+                        <path
+                            d="M7.82667 11.9714C7.83224 9.67307 9.72229 7.81863 12.0512 7.82792C14.3254 7.8372 16.183 9.726 16.1774 12.0225C16.1709 14.2994 14.2846 16.1724 11.9993 16.1706C9.6926 16.1687 7.82111 14.2855 7.82667 11.9714ZM12.016 14.6309C13.4681 14.6235 14.6353 13.4562 14.6399 12.0057C14.6446 10.5441 13.4411 9.33691 11.9881 9.34527C10.5527 9.35455 9.37063 10.5432 9.36228 11.9862C9.35393 13.4507 10.5453 14.6374 12.016 14.6309Z"
+                            fill="white"></path>
+                        <path
+                            d="M17.2089 7.74505C17.2173 8.27714 16.823 8.69409 16.2978 8.70895C15.7671 8.72381 15.3449 8.32915 15.3291 7.80355C15.3124 7.24917 15.7207 6.81551 16.2625 6.81179C16.7849 6.80808 17.2006 7.21853 17.2089 7.74505Z"
+                            fill="white"></path>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0">
+                            <rect width="16" height="16" fill="white" transform="translate(4 4)"></rect>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

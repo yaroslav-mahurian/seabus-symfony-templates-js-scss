@@ -1,0 +1,44 @@
+.swiper-custom-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &.swiper-pagination-clickable {
+        .swiper-custom-pagination__el {
+            cursor: pointer;
+        }
+    }
+}
+
+.swiper-custom-pagination__el {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #0084AA;
+    border-radius: 50%;
+    background-color: transparent;
+    margin-right: 15px;
+
+    transition: background-color .1s ease-out;
+
+    &:last-child {
+        margin-right: 0px;
+    }
+
+    &:hover {
+        background-color: #0084AA;
+    }
+
+    &--active {
+        background-color: #0084AA;
+    }
+
+    @media (max-width: 1199px) {
+        width: 12px;
+        height: 12px;
+        margin-right: 12px;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+    } 
+}
